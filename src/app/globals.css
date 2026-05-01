@@ -34,10 +34,10 @@ body {
     linear-gradient(
       180deg,
       #afeafb 0%,
-      #a7dff2 10%,
-      #8cc5d8 28%,
-      #6da1b6 53%,
-      #5e91a6 72%,
+      #a7e0f2 12%,
+      #8cc5d8 30%,
+      #6ea2b7 54%,
+      #5d91a6 74%,
       #477687 90%,
       #3d6d7b 100%
     )
@@ -66,6 +66,10 @@ svg {
   display: block;
 }
 
+nextjs-portal {
+  display: none !important;
+}
+
 .profile-screen {
   width: 100vw;
   height: 100dvh;
@@ -76,10 +80,10 @@ svg {
     linear-gradient(
       180deg,
       #afeafb 0%,
-      #a7dff2 10%,
-      #8cc5d8 28%,
-      #6da1b6 53%,
-      #5e91a6 72%,
+      #a7e0f2 12%,
+      #8cc5d8 30%,
+      #6ea2b7 54%,
+      #5d91a6 74%,
       #477687 90%,
       #3d6d7b 100%
     );
@@ -282,11 +286,136 @@ svg {
 }
 
 .bottom-menu {
-  flex: 0 0 min(115px, 16.34vw);
-  width: min(636px, 90.34vw);
-  height: min(115px, 16.34vw);
+  position: relative;
+  isolation: isolate;
+  flex: 0 0 min(111px, 15.77vw);
+  width: min(632px, 89.77vw);
+  height: min(111px, 15.77vw);
   margin: 0 auto;
-  pointer-events: none;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: min(56px, 7.95vw);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.095),
+      rgba(255, 255, 255, 0.025) 42%,
+      rgba(0, 0, 0, 0.14)
+    ),
+    rgba(0, 0, 0, 0.13);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.045),
+    0 8px 20px rgba(0, 0, 0, 0.08);
+  -webkit-backdrop-filter: blur(26px) saturate(112%);
+  backdrop-filter: blur(26px) saturate(112%);
+}
+
+.bottom-menu__indicator {
+  --menu-inset: min(5px, 0.71vw);
+  position: absolute;
+  z-index: -1;
+  top: var(--menu-inset);
+  bottom: var(--menu-inset);
+  left: var(--menu-inset);
+  width: calc((100% - (var(--menu-inset) * 2)) / 3);
+  border-radius: min(52px, 7.39vw);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.095) 54%,
+      rgba(255, 255, 255, 0.045)
+    ),
+    rgba(255, 255, 255, 0.105);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.055);
+  opacity: 0.96;
+  transform: translateX(100%);
+  transition: transform 420ms cubic-bezier(0.2, 1.18, 0.3, 1);
+  -webkit-backdrop-filter: blur(28px) saturate(116%);
+  backdrop-filter: blur(28px) saturate(116%);
+}
+
+.bottom-menu[data-active-index="0"] .bottom-menu__indicator {
+  transform: translateX(0);
+}
+
+.bottom-menu[data-active-index="1"] .bottom-menu__indicator {
+  transform: translateX(100%);
+}
+
+.bottom-menu[data-active-index="2"] .bottom-menu__indicator {
+  transform: translateX(200%);
+}
+
+.bottom-menu__tabs {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+}
+
+.bottom-menu__tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: min(5px, 0.71vw);
+  min-width: 0;
+  padding: min(15px, 2.13vw) min(8px, 1.14vw) min(12px, 1.7vw);
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  touch-action: manipulation;
+  transition:
+    color 280ms ease,
+    opacity 180ms ease,
+    transform 110ms ease;
+}
+
+.bottom-menu__tab:active {
+  transform: scale(0.975);
+  opacity: 0.9;
+}
+
+.bottom-menu__tab:focus-visible {
+  color: #ffffff;
+}
+
+.bottom-menu__tab[aria-selected="true"] {
+  color: #ffffff;
+  opacity: 1;
+}
+
+.bottom-menu__icon {
+  display: grid;
+  width: min(40px, 5.68vw);
+  height: min(40px, 5.68vw);
+  place-items: center;
+}
+
+.bottom-menu__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bottom-menu__label {
+  overflow: hidden;
+  max-width: 100%;
+  color: currentColor;
+  font-size: min(18px, 2.56vw);
+  font-weight: 450;
+  line-height: min(22px, 3.13vw);
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @supports not ((backdrop-filter: blur(1px))) {
@@ -296,5 +425,9 @@ svg {
 
   .poster-card {
     background: rgba(65, 123, 145, 0.66);
+  }
+
+  .bottom-menu {
+    background: rgba(0, 0, 0, 0.18);
   }
 }

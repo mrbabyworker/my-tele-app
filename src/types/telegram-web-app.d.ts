@@ -67,6 +67,11 @@ type TelegramWebApp = {
   setBackgroundColor: (color: string) => void;
   enableClosingConfirmation: () => void;
   disableClosingConfirmation: () => void;
+  HapticFeedback?: {
+    selectionChanged?: () => void;
+    impactOccurred?: (style: "light" | "medium" | "heavy" | "rigid" | "soft") => void;
+    notificationOccurred?: (type: "error" | "success" | "warning") => void;
+  };
 };
 
 interface Window {
