@@ -14,6 +14,18 @@ const PROJECT_GROUPS = {
       id: "mine-2",
       className: "work-card__visual--two",
     },
+    {
+      id: "mine-3",
+      className: "work-card__visual--three",
+    },
+    {
+      id: "mine-4",
+      className: "work-card__visual--four",
+    },
+    {
+      id: "mine-5",
+      className: "work-card__visual--five",
+    },
   ],
   other: [
     {
@@ -23,6 +35,18 @@ const PROJECT_GROUPS = {
     {
       id: "other-2",
       className: "work-card__visual--one",
+    },
+    {
+      id: "other-3",
+      className: "work-card__visual--four",
+    },
+    {
+      id: "other-4",
+      className: "work-card__visual--five",
+    },
+    {
+      id: "other-5",
+      className: "work-card__visual--three",
     },
   ],
 };

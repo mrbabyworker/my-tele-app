@@ -58,7 +58,7 @@ body::-webkit-scrollbar {
 
 html:has(.works-screen),
 body:has(.works-screen) {
-  background: #05070b;
+  background: #141414;
 }
 
 button,
@@ -399,45 +399,7 @@ nextjs-portal {
   min-height: 100dvh;
   overflow-y: auto;
   scrollbar-width: none;
-  background:
-    radial-gradient(
-      circle at 16% 13%,
-      rgba(150, 181, 229, 0.22) 0 1px,
-      transparent 1.8px
-    ),
-    radial-gradient(
-      circle at 76% 8%,
-      rgba(255, 211, 117, 0.36) 0 1.2px,
-      transparent 2px
-    ),
-    radial-gradient(
-      circle at 89% 34%,
-      rgba(255, 238, 185, 0.26) 0 1px,
-      transparent 1.8px
-    ),
-    radial-gradient(
-      circle at 22% 61%,
-      rgba(255, 214, 143, 0.34) 0 1px,
-      transparent 1.8px
-    ),
-    radial-gradient(
-      circle at 66% 54%,
-      rgba(183, 204, 255, 0.2) 0 1px,
-      transparent 1.8px
-    ),
-    radial-gradient(
-      circle at 79% 75%,
-      rgba(255, 231, 183, 0.34) 0 1.2px,
-      transparent 2px
-    ),
-    linear-gradient(
-      180deg,
-      #05070b 0%,
-      #070a12 25%,
-      #090d16 52%,
-      #0a0f19 76%,
-      #04060a 100%
-    );
+  background: #141414;
 }
 
 .works-screen::-webkit-scrollbar {
@@ -446,11 +408,7 @@ nextjs-portal {
 
 .works-screen::before,
 .works-screen::after {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  content: "";
+  display: none;
 }
 
 .works-screen::before {
@@ -713,6 +671,36 @@ nextjs-portal {
       rgba(182, 208, 219, 0) 38%
     ),
     linear-gradient(135deg, #61798a 0%, #708a9a 52%, #5c7583 100%);
+}
+
+.work-card__visual--three {
+  background:
+    radial-gradient(
+      circle at 72% 22%,
+      rgba(232, 217, 177, 0.22) 0,
+      rgba(232, 217, 177, 0) 35%
+    ),
+    linear-gradient(135deg, #6b7064 0%, #858b7b 52%, #676f65 100%);
+}
+
+.work-card__visual--four {
+  background:
+    radial-gradient(
+      circle at 30% 28%,
+      rgba(206, 197, 224, 0.22) 0,
+      rgba(206, 197, 224, 0) 36%
+    ),
+    linear-gradient(135deg, #696477 0%, #817b91 52%, #676276 100%);
+}
+
+.work-card__visual--five {
+  background:
+    radial-gradient(
+      circle at 78% 26%,
+      rgba(211, 230, 219, 0.2) 0,
+      rgba(211, 230, 219, 0) 36%
+    ),
+    linear-gradient(135deg, #5f746c 0%, #748a82 52%, #5e726a 100%);
 }
 
 .work-card__cta {
