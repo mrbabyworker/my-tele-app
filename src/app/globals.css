@@ -1,0 +1,300 @@
+:root {
+  color-scheme: light;
+  --screen-max: 704px;
+  --profile-width: min(100vw, var(--screen-max));
+  --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+html {
+  overflow: hidden;
+  background: #3d6d7b;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  overflow: hidden;
+  scrollbar-width: none;
+  background:
+    linear-gradient(
+      180deg,
+      #afeafb 0%,
+      #a7dff2 10%,
+      #8cc5d8 28%,
+      #6da1b6 53%,
+      #5e91a6 72%,
+      #477687 90%,
+      #3d6d7b 100%
+    )
+    fixed;
+  color: #ffffff;
+  font-family: var(--font-system);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+img,
+svg {
+  display: block;
+}
+
+.profile-screen {
+  width: 100vw;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  background:
+    linear-gradient(
+      180deg,
+      #afeafb 0%,
+      #a7dff2 10%,
+      #8cc5d8 28%,
+      #6da1b6 53%,
+      #5e91a6 72%,
+      #477687 90%,
+      #3d6d7b 100%
+    );
+}
+
+.profile-screen::-webkit-scrollbar {
+  display: none;
+}
+
+.profile-frame {
+  display: flex;
+  flex-direction: column;
+  width: var(--profile-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding-bottom: max(min(32px, 4.55vw), env(safe-area-inset-bottom));
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 100%;
+  padding-top: min(114px, 16.2vw);
+}
+
+.hero-avatar {
+  width: min(400px, 56.82vw);
+  height: min(557px, 79.12vw);
+}
+
+.hero-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.profile-name {
+  margin: min(70px, 9.94vw) 0 0;
+  color: #ffffff;
+  font-size: min(58px, 8.24vw);
+  font-weight: 400;
+  line-height: min(64px, 9.09vw);
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: min(20px, 2.84vw);
+  width: 100%;
+  margin-top: min(34px, 4.83vw);
+}
+
+.social-button {
+  display: grid;
+  width: min(109px, 15.48vw);
+  height: min(109px, 15.48vw);
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(43, 96, 116, 0.64);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 24px rgba(24, 65, 78, 0.14);
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition:
+    transform 130ms ease,
+    opacity 130ms ease,
+    background-color 130ms ease;
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  backdrop-filter: blur(18px) saturate(130%);
+}
+
+.social-button:active {
+  transform: scale(0.965);
+  background: rgba(35, 83, 101, 0.72);
+  opacity: 0.92;
+}
+
+.social-button:focus-visible {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 3px rgba(255, 255, 255, 0.34),
+    0 12px 24px rgba(24, 65, 78, 0.14);
+}
+
+.social-button span {
+  color: currentColor;
+}
+
+.social-button__icon--telegram {
+  width: min(60px, 8.52vw);
+  height: min(52px, 7.39vw);
+}
+
+.social-button__icon--x {
+  width: min(56px, 7.95vw);
+  height: min(56px, 7.95vw);
+}
+
+.social-button__icon--instagram {
+  width: min(58px, 8.24vw);
+  height: min(58px, 8.24vw);
+}
+
+.social-button__icon--mail {
+  width: min(58px, 8.24vw);
+  height: min(46px, 6.53vw);
+}
+
+.social-button svg {
+  width: 100%;
+  height: 100%;
+}
+
+.poster-card {
+  display: flex;
+  align-items: center;
+  width: min(634px, 90.06vw);
+  min-height: min(126px, 17.9vw);
+  margin-top: min(25px, 3.55vw);
+  padding: 0 min(34px, 4.83vw);
+  border: 0;
+  border-radius: min(44px, 6.25vw);
+  background: rgba(45, 100, 120, 0.52);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 28px rgba(21, 61, 75, 0.1);
+  color: #f4f8fa;
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+  touch-action: manipulation;
+  transition:
+    transform 130ms ease,
+    opacity 130ms ease,
+    background-color 130ms ease;
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  backdrop-filter: blur(22px) saturate(140%);
+}
+
+.poster-card:active {
+  transform: scale(0.99);
+  background: rgba(39, 90, 109, 0.58);
+  opacity: 0.94;
+}
+
+.poster-card:focus-visible {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 0 0 3px rgba(255, 255, 255, 0.28),
+    0 12px 28px rgba(21, 61, 75, 0.1);
+}
+
+.poster-card__thumb {
+  flex: 0 0 min(72px, 10.23vw);
+  width: min(72px, 10.23vw);
+  height: min(72px, 10.23vw);
+  overflow: hidden;
+  border-radius: 50%;
+  background: rgba(174, 232, 252, 0.28);
+}
+
+.poster-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.poster-card__text {
+  min-width: 0;
+  margin-left: min(18px, 2.56vw);
+  padding-right: min(18px, 2.56vw);
+  color: #f4f8fa;
+  font-size: min(27px, 3.84vw);
+  font-weight: 600;
+  line-height: min(34px, 4.83vw);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.poster-card__chevron {
+  flex: 0 0 min(18px, 2.56vw);
+  width: min(18px, 2.56vw);
+  height: min(28px, 3.98vw);
+  margin-left: auto;
+  color: rgba(154, 187, 201, 0.85);
+}
+
+.profile-spacer {
+  flex: 1 1 auto;
+  min-height: min(275px, 39.06vw);
+}
+
+.bottom-menu {
+  flex: 0 0 min(115px, 16.34vw);
+  width: min(636px, 90.34vw);
+  height: min(115px, 16.34vw);
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+@supports not ((backdrop-filter: blur(1px))) {
+  .social-button {
+    background: rgba(55, 111, 132, 0.75);
+  }
+
+  .poster-card {
+    background: rgba(65, 123, 145, 0.66);
+  }
+}
