@@ -1,7 +1,7 @@
 "use client";
 
 import { BottomMenu } from "@/components/bottom-menu";
-import Image from "next/image";
+import { LottieAnimation } from "@/components/lottie-animation";
 import { useState } from "react";
 
 const PROJECT_GROUPS = {
@@ -46,15 +46,10 @@ export default function WorksPage() {
       <section className="works-frame" aria-label="My Works">
         <div className="works-content">
           <header className="works-hero">
-            <div className="works-hero__mascot" aria-hidden="true">
-              <Image
-                src="/fluffy-mascot.png"
-                alt=""
-                width={211}
-                height={250}
-                priority
-              />
-            </div>
+            <LottieAnimation
+              className="works-hero__mascot"
+              path="/fluffy-mascot.tgs.json"
+            />
 
             <h1 className="works-title">My Works</h1>
             <p className="works-subtitle">

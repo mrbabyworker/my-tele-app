@@ -519,7 +519,7 @@ nextjs-portal {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: min(76px, 10.8vw) min(48px, 6.82vw) 0;
+  padding: min(114px, 16.2vw) min(48px, 6.82vw) 0;
 }
 
 .works-hero {
@@ -531,19 +531,19 @@ nextjs-portal {
 }
 
 .works-hero__mascot {
-  width: min(120px, 17.05vw);
-  height: min(120px, 17.05vw);
+  width: min(214px, 30.4vw);
+  height: min(214px, 30.4vw);
   filter: drop-shadow(0 7px 17px rgba(84, 153, 255, 0.2));
 }
 
-.works-hero__mascot img {
+.works-hero__mascot svg {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  overflow: visible;
 }
 
 .works-title {
-  margin: min(17px, 2.41vw) 0 0;
+  margin: min(15px, 2.13vw) 0 0;
   color: #ffffff;
   font-size: min(56px, 7.95vw);
   font-weight: 650;
