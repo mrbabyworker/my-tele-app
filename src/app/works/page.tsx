@@ -66,64 +66,66 @@ export default function WorksPage() {
   }
 
   return (
-    <main className="works-screen">
-      <section className="works-frame" aria-label="My Works">
-        <div className="works-content">
-          <header className="works-hero">
-            <LottieAnimation
-              className="works-hero__mascot"
-              path="/fluffy-mascot.tgs.json"
-            />
+    <>
+      <main className="works-screen">
+        <section className="works-frame" aria-label="My Works">
+          <div className="works-content">
+            <header className="works-hero">
+              <LottieAnimation
+                className="works-hero__mascot"
+                path="/fluffy-mascot.tgs.json"
+              />
 
-            <h1 className="works-title">My Works</h1>
-            <p className="works-subtitle">
-              On this page are projects that belong to me or projects in
-              creation of which I participated
-            </p>
-          </header>
+              <h1 className="works-title">My Works</h1>
+              <p className="works-subtitle">
+                On this page are projects that belong to me or projects in
+                creation of which I participated
+              </p>
+            </header>
 
-          <div
-            className="works-segmented"
-            data-selected={activeSegment}
-            role="tablist"
-            aria-label="Project type"
-          >
-            <span className="works-segmented__pill" aria-hidden="true" />
-            <button
-              className="works-segmented__button"
-              type="button"
-              role="tab"
-              aria-selected={activeSegment === "mine"}
-              onClick={() => selectSegment("mine")}
+            <div
+              className="works-segmented"
+              data-selected={activeSegment}
+              role="tablist"
+              aria-label="Project type"
             >
-              My projects
-            </button>
-            <button
-              className="works-segmented__button"
-              type="button"
-              role="tab"
-              aria-selected={activeSegment === "other"}
-              onClick={() => selectSegment("other")}
-            >
-              Other projects
-            </button>
+              <span className="works-segmented__pill" aria-hidden="true" />
+              <button
+                className="works-segmented__button"
+                type="button"
+                role="tab"
+                aria-selected={activeSegment === "mine"}
+                onClick={() => selectSegment("mine")}
+              >
+                My projects
+              </button>
+              <button
+                className="works-segmented__button"
+                type="button"
+                role="tab"
+                aria-selected={activeSegment === "other"}
+                onClick={() => selectSegment("other")}
+              >
+                Other projects
+              </button>
+            </div>
+
+            <div className="works-list" aria-label="Project cards">
+              {projects.map((project) => (
+                <article className="work-card" key={project.id}>
+                  <div className={`work-card__visual ${project.className}`} />
+                  <button className="work-card__cta" type="button">
+                    Watch more
+                  </button>
+                </article>
+              ))}
+            </div>
           </div>
 
-          <div className="works-list" aria-label="Project cards">
-            {projects.map((project) => (
-              <article className="work-card" key={project.id}>
-                <div className={`work-card__visual ${project.className}`} />
-                <button className="work-card__cta" type="button">
-                  Watch more
-                </button>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="works-spacer" aria-hidden="true" />
-        <BottomMenu activeTab="works" />
-      </section>
-    </main>
+          <div className="works-spacer" aria-hidden="true" />
+        </section>
+      </main>
+      <BottomMenu activeTab="works" />
+    </>
   );
 }

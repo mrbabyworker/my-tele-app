@@ -39,7 +39,8 @@ const SOCIAL_LINKS = [
 
 export default function Home() {
   return (
-    <main className="profile-screen">
+    <>
+      <main className="profile-screen">
       <section className="profile-frame" aria-label="Profile">
         <div className="profile-content">
           <div className="hero-avatar" aria-hidden="true">
@@ -85,9 +86,10 @@ export default function Home() {
         </div>
 
         <div className="profile-spacer" aria-hidden="true" />
-        <BottomMenu activeTab="main" />
       </section>
-    </main>
+      </main>
+      <BottomMenu activeTab="main" />
+    </>
   );
 }
 
