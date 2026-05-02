@@ -58,7 +58,7 @@ body::-webkit-scrollbar {
 
 html:has(.works-screen),
 body:has(.works-screen) {
-  background: #141414;
+  background: #000000;
 }
 
 button,
@@ -302,26 +302,32 @@ nextjs-portal {
   height: min(111px, 15.77vw);
   margin: 0 auto;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.075);
   border-radius: min(56px, 7.95vw);
   background:
+    radial-gradient(
+      120% 190% at 100% 48%,
+      rgba(65, 67, 78, 0.26) 0%,
+      rgba(39, 40, 48, 0.14) 28%,
+      rgba(0, 0, 0, 0) 56%
+    ),
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.095),
-      rgba(255, 255, 255, 0.025) 42%,
-      rgba(0, 0, 0, 0.14)
+      rgba(255, 255, 255, 0.058),
+      rgba(255, 255, 255, 0.02) 38%,
+      rgba(0, 0, 0, 0.15)
     ),
-    rgba(0, 0, 0, 0.13);
+    rgba(17, 17, 20, 0.72);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.11),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.045),
-    0 8px 20px rgba(0, 0, 0, 0.08);
-  -webkit-backdrop-filter: blur(26px) saturate(112%);
-  backdrop-filter: blur(26px) saturate(112%);
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.035),
+    0 10px 26px rgba(0, 0, 0, 0.18);
+  -webkit-backdrop-filter: blur(34px) saturate(168%) brightness(0.88);
+  backdrop-filter: blur(34px) saturate(168%) brightness(0.88);
 }
 
 .bottom-menu__indicator {
-  --menu-inset: min(5px, 0.71vw);
+  --menu-inset: min(7px, 0.99vw);
   position: absolute;
   z-index: -1;
   top: var(--menu-inset);
@@ -330,21 +336,28 @@ nextjs-portal {
   width: calc((100% - (var(--menu-inset) * 2)) / 3);
   border-radius: min(52px, 7.39vw);
   background:
+    radial-gradient(
+      90% 95% at 78% 20%,
+      rgba(255, 255, 255, 0.085),
+      rgba(255, 255, 255, 0) 58%
+    ),
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.095) 54%,
-      rgba(255, 255, 255, 0.045)
+      rgba(255, 255, 255, 0.095),
+      rgba(255, 255, 255, 0.035) 52%,
+      rgba(255, 255, 255, 0.016)
     ),
-    rgba(255, 255, 255, 0.105);
+    rgba(255, 255, 255, 0.026);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.055);
-  opacity: 0.96;
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.045),
+    0 8px 20px rgba(0, 0, 0, 0.12);
+  opacity: 1;
   transform: translateX(100%);
-  transition: transform 420ms cubic-bezier(0.2, 1.18, 0.3, 1);
-  -webkit-backdrop-filter: blur(28px) saturate(116%);
-  backdrop-filter: blur(28px) saturate(116%);
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  -webkit-backdrop-filter: blur(30px) saturate(158%) brightness(1.04);
+  backdrop-filter: blur(30px) saturate(158%) brightness(1.04);
 }
 
 .bottom-menu[data-active-index="0"] .bottom-menu__indicator {
@@ -369,16 +382,18 @@ nextjs-portal {
 }
 
 .bottom-menu__tab {
+  --bottom-menu-icon-disc: rgba(232, 232, 234, 0.95);
+  --bottom-menu-icon-mark: rgba(18, 18, 21, 0.94);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: min(5px, 0.71vw);
+  gap: min(6px, 0.85vw);
   min-width: 0;
   padding: min(15px, 2.13vw) min(8px, 1.14vw) min(12px, 1.7vw);
   border: 0;
   background: transparent;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(232, 232, 235, 0.9);
   cursor: pointer;
   outline: none;
   text-decoration: none;
@@ -399,7 +414,7 @@ nextjs-portal {
   min-height: 100dvh;
   overflow-y: auto;
   scrollbar-width: none;
-  background: #141414;
+  background: #000000;
 }
 
 .works-screen::-webkit-scrollbar {
@@ -753,7 +768,10 @@ nextjs-portal {
 @media (prefers-reduced-motion: reduce) {
   .works-segmented__pill,
   .works-segmented__button,
-  .work-card__cta {
+  .work-card__cta,
+  .bottom-menu__indicator,
+  .bottom-menu__tab,
+  .bottom-menu__icon-disc {
     transition: none;
   }
 }
@@ -768,15 +786,18 @@ nextjs-portal {
 }
 
 .bottom-menu__tab[aria-selected="true"] {
-  color: #ffffff;
+  --bottom-menu-icon-disc: rgba(232, 232, 234, 0);
+  --bottom-menu-icon-mark: #34b9c8;
+  color: #34b9c8;
   opacity: 1;
 }
 
 .bottom-menu__icon {
   display: grid;
-  width: min(40px, 5.68vw);
-  height: min(40px, 5.68vw);
+  width: min(42px, 5.97vw);
+  height: min(42px, 5.97vw);
   place-items: center;
+  color: var(--bottom-menu-icon-mark);
 }
 
 .bottom-menu__icon svg {
@@ -784,12 +805,19 @@ nextjs-portal {
   height: 100%;
 }
 
+.bottom-menu__icon-disc {
+  fill: var(--bottom-menu-icon-disc);
+  transition:
+    fill 220ms ease,
+    opacity 220ms ease;
+}
+
 .bottom-menu__label {
   overflow: hidden;
   max-width: 100%;
   color: currentColor;
   font-size: min(18px, 2.56vw);
-  font-weight: 450;
+  font-weight: 650;
   line-height: min(22px, 3.13vw);
   letter-spacing: 0;
   text-overflow: ellipsis;
@@ -806,6 +834,6 @@ nextjs-portal {
   }
 
   .bottom-menu {
-    background: rgba(0, 0, 0, 0.18);
+    background: rgba(10, 10, 12, 0.58);
   }
 }

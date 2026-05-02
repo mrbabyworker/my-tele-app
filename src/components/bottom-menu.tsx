@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 export type BottomMenuTab = "works" | "main" | "assistant";
 
@@ -42,10 +42,13 @@ type BottomMenuProps = {
 };
 
 export function BottomMenu({ activeTab }: BottomMenuProps) {
-  const activeIndex = ACTIVE_INDEX[activeTab];
+  const [pendingTab, setPendingTab] = useState<BottomMenuTab | null>(null);
+  const visualTab = pendingTab ?? activeTab;
+  const activeIndex = ACTIVE_INDEX[visualTab];
 
   function handleSelect(tab: BottomMenuTab) {
-    if (tab !== activeTab) {
+    if (tab !== visualTab) {
+      setPendingTab(tab);
       window.Telegram?.WebApp.HapticFeedback?.selectionChanged?.();
     }
   }
@@ -65,7 +68,7 @@ export function BottomMenu({ activeTab }: BottomMenuProps) {
             className="bottom-menu__tab"
             href={tab.href}
             role="tab"
-            aria-selected={tab.id === activeTab}
+            aria-selected={tab.id === visualTab}
             aria-label={tab.label}
             onClick={() => handleSelect(tab.id)}
           >
@@ -83,6 +86,7 @@ export function BottomMenu({ activeTab }: BottomMenuProps) {
 function WorksIcon() {
   return (
     <svg viewBox="0 0 44 44" focusable="false" aria-hidden="true">
+      <circle className="bottom-menu__icon-disc" cx="22" cy="22" r="18.2" />
       <path
         d="M15.8 14.2v-3.1c0-2.2 1.6-3.9 3.8-3.9h4.8c2.2 0 3.8 1.7 3.8 3.9v3.1"
         fill="none"
@@ -114,25 +118,11 @@ function WorksIcon() {
 function MainIcon() {
   return (
     <svg viewBox="0 0 44 44" focusable="false" aria-hidden="true">
-      <defs>
-        <mask id="main-icon-mask">
-          <rect width="44" height="44" fill="black" />
-          <circle cx="22" cy="22" r="18" fill="white" />
-          <circle cx="22" cy="17.2" r="5.7" fill="black" />
-          <path
-            d="M11.4 33.1c2.1-6 5.8-9.2 10.6-9.2s8.5 3.2 10.6 9.2"
-            fill="black"
-            stroke="black"
-            strokeLinecap="round"
-            strokeWidth="4.4"
-          />
-        </mask>
-      </defs>
-      <rect
-        width="44"
-        height="44"
+      <circle className="bottom-menu__icon-disc" cx="22" cy="22" r="18.2" />
+      <circle cx="22" cy="17.2" r="5.7" fill="currentColor" />
+      <path
+        d="M11.6 33.1c2.1-6 5.7-9.2 10.4-9.2s8.3 3.2 10.4 9.2"
         fill="currentColor"
-        mask="url(#main-icon-mask)"
       />
     </svg>
   );
@@ -141,6 +131,7 @@ function MainIcon() {
 function AssistantIcon() {
   return (
     <svg viewBox="0 0 44 44" focusable="false" aria-hidden="true">
+      <circle className="bottom-menu__icon-disc" cx="22" cy="22" r="18.2" />
       <path
         d="M22 8.2v5.1"
         fill="none"
