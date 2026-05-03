@@ -76,12 +76,22 @@ export default function Home() {
             ))}
           </div>
 
-          <button className="poster-card" type="button">
-            <span className="poster-card__thumb" aria-hidden="true">
-              <Image src="/memoji-avatar.png" alt="" width={72} height={72} />
+          <button className="about-card" type="button">
+            <span className="about-card__panel">
+              <span className="about-card__title">Hello</span>
+              <span className="about-card__description">
+                I am a developer and during my career I have developed more
+                than 10 applications and websites for private startups and
+                entrepreneurs. In this application you can contact me or ask
+                questions to the AI assistant, find links to my social networks
+                and view prototypes of projects created by me.
+              </span>
             </span>
-            <span className="poster-card__text">Фото и постер контакта</span>
-            <ChevronIcon />
+
+            <span className="about-card__footer">
+              <span>Read more about me</span>
+              <ArrowIcon />
+            </span>
           </button>
         </div>
 
@@ -137,21 +147,21 @@ function MailIcon() {
   );
 }
 
-function ChevronIcon() {
+function ArrowIcon() {
   return (
     <svg
-      className="poster-card__chevron"
-      viewBox="0 0 20 32"
+      className="about-card__arrow"
+      viewBox="0 0 20 18"
       focusable="false"
       aria-hidden="true"
     >
       <path
-        d="m5 4 10 12L5 28"
+        d="M3 9h13M11 4l5 5-5 5"
         fill="none"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth="4"
+        strokeWidth="2.8"
       />
     </svg>
   );

@@ -244,79 +244,160 @@ nextjs-portal {
   height: 100%;
 }
 
-.poster-card {
-  display: flex;
-  align-items: center;
-  width: min(634px, 90.06vw);
-  min-height: min(126px, 17.9vw);
+.about-card {
+  --about-width: min(634px, 90.06vw);
+  --about-radius: 48px;
+  --about-panel-height: calc(var(--about-width) * 0.546);
+  --about-footer-visible: calc(var(--about-width) * 0.087);
+  --about-footer-height: calc(var(--about-width) * 0.159);
+  --about-overlap: calc(
+    var(--about-footer-height) - var(--about-footer-visible)
+  );
+  position: relative;
+  display: block;
+  width: var(--about-width);
   margin-top: min(25px, 3.55vw);
-  padding: 0 min(34px, 4.83vw);
+  padding: 0 0 calc(var(--about-footer-height) - var(--about-overlap));
   border: 0;
-  border-radius: min(44px, 6.25vw);
-  background: rgba(45, 100, 120, 0.52);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 12px 28px rgba(21, 61, 75, 0.1);
+  background: transparent;
   color: #f4f8fa;
   cursor: pointer;
   outline: none;
-  text-align: left;
+  text-align: center;
   touch-action: manipulation;
   transition:
-    transform 130ms ease,
-    opacity 130ms ease,
-    background-color 130ms ease;
-  -webkit-backdrop-filter: blur(22px) saturate(140%);
-  backdrop-filter: blur(22px) saturate(140%);
+    transform 160ms ease,
+    opacity 160ms ease;
 }
 
-.poster-card:active {
+.about-card:active {
   transform: scale(0.99);
-  background: rgba(39, 90, 109, 0.58);
   opacity: 0.94;
 }
 
-.poster-card:focus-visible {
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.09),
-    0 0 0 3px rgba(255, 255, 255, 0.28),
-    0 12px 28px rgba(21, 61, 75, 0.1);
+.about-card:focus-visible {
+  border-radius: var(--about-radius);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.28);
 }
 
-.poster-card__thumb {
-  flex: 0 0 min(72px, 10.23vw);
-  width: min(72px, 10.23vw);
-  height: min(72px, 10.23vw);
-  overflow: hidden;
-  border-radius: 50%;
-  background: rgba(174, 232, 252, 0.28);
-}
-
-.poster-card__thumb img {
+.about-card__panel,
+.about-card__footer {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
 }
 
-.poster-card__text {
-  min-width: 0;
-  margin-left: min(18px, 2.56vw);
-  padding-right: min(18px, 2.56vw);
-  color: #f4f8fa;
-  font-size: min(27px, 3.84vw);
-  font-weight: 600;
-  line-height: min(34px, 4.83vw);
+.about-card__panel {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  min-height: var(--about-panel-height);
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 43px 56px 64px;
+  border-radius: var(--about-radius);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(60, 126, 149, 0.52) 0%,
+      rgba(45, 100, 120, 0.52) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(20, 57, 70, 0.08),
+    0 14px 30px rgba(21, 61, 75, 0.11);
+}
+
+.about-card__footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  height: var(--about-footer-height);
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: var(--about-overlap) 32px 18px;
+  border-radius: 0 0 var(--about-radius) var(--about-radius);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(31, 79, 96, 0.46) 0%,
+      rgba(26, 68, 84, 0.56) 100%
+    );
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    0 14px 28px rgba(21, 61, 75, 0.09);
+  color: rgba(244, 248, 250, 0.72);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 28px;
   letter-spacing: 0;
-  white-space: nowrap;
 }
 
-.poster-card__chevron {
-  flex: 0 0 min(18px, 2.56vw);
-  width: min(18px, 2.56vw);
-  height: min(28px, 3.98vw);
-  margin-left: auto;
-  color: rgba(154, 187, 201, 0.85);
+.about-card__title {
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: 750;
+  line-height: 46px;
+  letter-spacing: 0;
+}
+
+.about-card__description {
+  width: 100%;
+  max-width: 540px;
+  margin-top: 16px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0;
+}
+
+.about-card__arrow {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 18px;
+  color: #52a8ff;
+}
+
+@media (max-width: 430px) {
+  .about-card {
+    --about-radius: 34px;
+  }
+
+  .about-card__panel {
+    padding: 44px 30px 72px;
+  }
+
+  .about-card__title {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .about-card__description {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 23px;
+  }
+
+  .about-card__footer {
+    gap: 6px;
+    padding-right: 24px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    font-size: 17px;
+    line-height: 22px;
+  }
+
+  .about-card__arrow {
+    flex-basis: 18px;
+    width: 18px;
+    height: 16px;
+  }
 }
 
 .profile-spacer {
@@ -801,6 +882,7 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .about-card,
   .works-segmented__pill,
   .works-segmented__button,
   .work-card__cta,
@@ -901,8 +983,12 @@ body:has(.profile-screen) .bottom-menu {
     background: rgba(55, 111, 132, 0.75);
   }
 
-  .poster-card {
+  .about-card__panel {
     background: rgba(65, 123, 145, 0.66);
+  }
+
+  .about-card__footer {
+    background: rgba(34, 78, 96, 0.72);
   }
 
   .bottom-menu {
