@@ -245,19 +245,15 @@ nextjs-portal {
 }
 
 .about-card {
-  --about-width: min(634px, 90.06vw);
   --about-radius: 48px;
-  --about-panel-height: calc(var(--about-width) * 0.546);
-  --about-footer-visible: calc(var(--about-width) * 0.087);
-  --about-footer-height: calc(var(--about-width) * 0.159);
-  --about-overlap: calc(
-    var(--about-footer-height) - var(--about-footer-visible)
-  );
+  --about-footer-height: 122px;
+  --about-overlap: 58px;
   position: relative;
   display: block;
-  width: var(--about-width);
+  width: min(634px, 90.06vw);
+  min-height: calc(338px + var(--about-footer-height) - var(--about-overlap));
   margin-top: min(25px, 3.55vw);
-  padding: 0 0 calc(var(--about-footer-height) - var(--about-overlap));
+  padding: 0;
   border: 0;
   background: transparent;
   color: #f4f8fa;
@@ -291,22 +287,14 @@ nextjs-portal {
   position: relative;
   z-index: 2;
   display: flex;
-  min-height: var(--about-panel-height);
+  min-height: 338px;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 43px 56px 64px;
+  justify-content: center;
+  padding: 46px 56px;
   border-radius: var(--about-radius);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(60, 126, 149, 0.52) 0%,
-      rgba(45, 100, 120, 0.52) 100%
-    );
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    inset 0 -1px 0 rgba(20, 57, 70, 0.08),
-    0 14px 30px rgba(21, 61, 75, 0.11);
+  background: #3e7e97;
+  box-shadow: 0 14px 30px rgba(21, 61, 75, 0.11);
 }
 
 .about-card__footer {
@@ -320,18 +308,11 @@ nextjs-portal {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: var(--about-overlap) 32px 18px;
+  padding: var(--about-overlap) 32px 0;
   border-radius: 0 0 var(--about-radius) var(--about-radius);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(31, 79, 96, 0.46) 0%,
-      rgba(26, 68, 84, 0.56) 100%
-    );
-  box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-    0 14px 28px rgba(21, 61, 75, 0.09);
-  color: rgba(244, 248, 250, 0.72);
+  background: #2d667b;
+  box-shadow: 0 14px 28px rgba(21, 61, 75, 0.09);
+  color: rgba(244, 248, 250, 0.78);
   font-size: 23px;
   font-weight: 500;
   line-height: 28px;
@@ -349,11 +330,11 @@ nextjs-portal {
 .about-card__description {
   width: 100%;
   max-width: 540px;
-  margin-top: 16px;
+  margin-top: 20px;
   color: rgba(255, 255, 255, 0.92);
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 400;
-  line-height: 26px;
+  line-height: 30px;
   letter-spacing: 0;
 }
 
@@ -367,10 +348,13 @@ nextjs-portal {
 @media (max-width: 430px) {
   .about-card {
     --about-radius: 34px;
+    --about-footer-height: 104px;
+    --about-overlap: 50px;
   }
 
   .about-card__panel {
-    padding: 44px 30px 72px;
+    min-height: 0;
+    padding: 38px 30px;
   }
 
   .about-card__title {
@@ -387,7 +371,6 @@ nextjs-portal {
   .about-card__footer {
     gap: 6px;
     padding-right: 24px;
-    padding-bottom: 16px;
     padding-left: 24px;
     font-size: 17px;
     line-height: 22px;
@@ -984,11 +967,11 @@ body:has(.profile-screen) .bottom-menu {
   }
 
   .about-card__panel {
-    background: rgba(65, 123, 145, 0.66);
+    background: #3e7e97;
   }
 
   .about-card__footer {
-    background: rgba(34, 78, 96, 0.72);
+    background: #2d667b;
   }
 
   .bottom-menu {
