@@ -76,7 +76,7 @@ export default function Home() {
             ))}
           </div>
 
-          <button className="about-card" type="button">
+          <div className="about-card">
             <span className="about-card__panel">
               <span className="about-card__title">Hello</span>
               <span className="about-card__description">
@@ -88,11 +88,11 @@ export default function Home() {
               </span>
             </span>
 
-            <span className="about-card__footer">
+            <button className="about-card__footer" type="button">
               <span>Read more about me</span>
               <ArrowIcon />
-            </span>
-          </button>
+            </button>
+          </div>
         </div>
 
         <div className="profile-spacer" aria-hidden="true" />

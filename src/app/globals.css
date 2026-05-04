@@ -245,35 +245,22 @@ nextjs-portal {
 }
 
 .about-card {
-  --about-radius: 48px;
-  --about-footer-height: 122px;
-  --about-overlap: 58px;
+  --about-width: min(651px, 92.38vw);
+  --about-radius: clamp(34px, calc(var(--about-width) * 0.067), 52px);
+  --about-footer-visible: calc(var(--about-width) * 0.0864);
+  --about-footer-height: calc(var(--about-width) * 0.161);
+  --about-overlap: calc(
+    var(--about-footer-height) - var(--about-footer-visible)
+  );
   position: relative;
+  z-index: 9;
   display: block;
-  width: min(634px, 90.06vw);
-  min-height: calc(338px + var(--about-footer-height) - var(--about-overlap));
+  width: var(--about-width);
   margin-top: min(25px, 3.55vw);
-  padding: 0;
-  border: 0;
+  padding: 0 0 var(--about-footer-visible);
   background: transparent;
   color: #f4f8fa;
-  cursor: pointer;
-  outline: none;
   text-align: center;
-  touch-action: manipulation;
-  transition:
-    transform 160ms ease,
-    opacity 160ms ease;
-}
-
-.about-card:active {
-  transform: scale(0.99);
-  opacity: 0.94;
-}
-
-.about-card:focus-visible {
-  border-radius: var(--about-radius);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.28);
 }
 
 .about-card__panel,
@@ -287,11 +274,11 @@ nextjs-portal {
   position: relative;
   z-index: 2;
   display: flex;
-  min-height: 338px;
+  min-height: calc(var(--about-width) * 0.55);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 46px 56px;
+  padding: min(52px, 7.39vw) min(60px, 8.52vw);
   border-radius: var(--about-radius);
   background: #3e7e97;
   box-shadow: 0 14px 30px rgba(21, 61, 75, 0.11);
@@ -308,7 +295,9 @@ nextjs-portal {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  margin: 0;
   padding: var(--about-overlap) 32px 0;
+  border: 0;
   border-radius: 0 0 var(--about-radius) var(--about-radius);
   background: #2d667b;
   box-shadow: 0 14px 28px rgba(21, 61, 75, 0.09);
@@ -317,6 +306,11 @@ nextjs-portal {
   font-weight: 500;
   line-height: 28px;
   letter-spacing: 0;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  touch-action: manipulation;
+  appearance: none;
 }
 
 .about-card__title {
@@ -347,14 +341,12 @@ nextjs-portal {
 
 @media (max-width: 430px) {
   .about-card {
-    --about-radius: 34px;
-    --about-footer-height: 104px;
-    --about-overlap: 50px;
+    --about-radius: 30px;
   }
 
   .about-card__panel {
     min-height: 0;
-    padding: 38px 30px;
+    padding: 38px 28px;
   }
 
   .about-card__title {
@@ -865,7 +857,6 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-card,
   .works-segmented__pill,
   .works-segmented__button,
   .work-card__cta,
