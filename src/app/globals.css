@@ -741,6 +741,255 @@ body:has(.profile-screen) .bottom-menu {
   content: "";
 }
 
+.work-card--featured {
+  height: min(242px, 34.38vw);
+  overflow: hidden;
+  border: 0;
+  border-radius: min(38px, 5.4vw);
+  background: #fbfbfb;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.work-card--featured::after {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.cactus-work-card__visual {
+  position: relative;
+  z-index: 2;
+  height: min(181px, 25.71vw);
+  overflow: hidden;
+  border-radius: min(38px, 5.4vw);
+  background:
+    radial-gradient(
+      circle at 78% 21%,
+      rgba(93, 216, 255, 0.58) 0,
+      rgba(93, 216, 255, 0.08) 21%,
+      rgba(93, 216, 255, 0) 39%
+    ),
+    radial-gradient(
+      circle at 89% 8%,
+      rgba(255, 255, 255, 0.78) 0 3px,
+      rgba(255, 255, 255, 0) 4px
+    ),
+    linear-gradient(135deg, #32b7d7 0%, #277ba9 58%, #0c2745 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.cactus-work-card__visual::before,
+.cactus-work-card__visual::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.cactus-work-card__visual::before {
+  opacity: 0.48;
+  background:
+    radial-gradient(
+      circle at 10% 12%,
+      rgba(255, 255, 255, 0.62) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle at 24% 28%,
+      rgba(255, 255, 255, 0.36) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle at 42% 9%,
+      rgba(255, 255, 255, 0.52) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle at 56% 37%,
+      rgba(255, 255, 255, 0.34) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle at 67% 15%,
+      rgba(255, 255, 255, 0.52) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle at 73% 71%,
+      rgba(255, 255, 255, 0.28) 0 1px,
+      transparent 1.8px
+    );
+  background-size:
+    min(150px, 21.31vw) min(100px, 14.2vw),
+    min(132px, 18.75vw) min(116px, 16.48vw),
+    min(172px, 24.43vw) min(122px, 17.33vw),
+    min(138px, 19.6vw) min(98px, 13.92vw),
+    min(164px, 23.3vw) min(112px, 15.91vw),
+    min(148px, 21.02vw) min(110px, 15.63vw);
+}
+
+.cactus-work-card__visual::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0) 39%,
+      rgba(255, 255, 255, 0.08) 74%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+}
+
+.cactus-work-card__copy {
+  position: relative;
+  z-index: 3;
+  width: min(392px, 55.68vw);
+  padding: min(30px, 4.26vw) 0 0 min(31px, 4.4vw);
+  color: #ffffff;
+}
+
+.cactus-work-card__title {
+  margin: 0;
+  color: #ffffff;
+  font-size: min(34px, 4.83vw);
+  font-weight: 850;
+  line-height: min(39px, 5.54vw);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(5, 40, 72, 0.16);
+}
+
+.cactus-work-card__subtitle {
+  width: min(322px, 45.74vw);
+  margin: min(4px, 0.57vw) 0 0;
+  color: rgba(255, 255, 255, 0.91);
+  font-size: min(20px, 2.84vw);
+  font-weight: 650;
+  line-height: min(25px, 3.55vw);
+  letter-spacing: 0;
+}
+
+.cactus-work-card__chips {
+  display: flex;
+  gap: min(13px, 1.85vw);
+  margin-top: min(18px, 2.56vw);
+}
+
+.cactus-work-card__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: min(7px, 0.99vw);
+  height: min(34px, 4.83vw);
+  padding: 0 min(12px, 1.7vw) 0 min(7px, 0.99vw);
+  border-radius: min(17px, 2.41vw);
+  background: rgba(24, 82, 106, 0.68);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 5px 11px rgba(10, 50, 74, 0.12);
+  color: rgba(255, 255, 255, 0.96);
+  font-size: min(17px, 2.41vw);
+  font-weight: 690;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.cactus-work-card__chip-icon {
+  display: grid;
+  width: min(24px, 3.41vw);
+  height: min(24px, 3.41vw);
+  place-items: center;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #2777a2;
+  font-size: min(10px, 1.42vw);
+  font-weight: 850;
+  line-height: 1;
+}
+
+.cactus-work-card__chip-icon--spark::before {
+  width: min(11px, 1.56vw);
+  height: min(11px, 1.56vw);
+  background: currentColor;
+  clip-path: polygon(
+    50% 0,
+    62% 34%,
+    100% 50%,
+    62% 66%,
+    50% 100%,
+    38% 66%,
+    0 50%,
+    38% 34%
+  );
+  content: "";
+}
+
+.cactus-work-card__avatar {
+  position: absolute;
+  right: max(-44px, -6.25vw);
+  bottom: max(-49px, -6.96vw);
+  z-index: 1;
+  width: min(230px, 32.67vw);
+  height: min(230px, 32.67vw);
+  border-radius: min(43px, 6.11vw);
+  object-fit: cover;
+  box-shadow:
+    0 0 0 min(7px, 0.99vw) rgba(197, 244, 255, 0.24),
+    0 14px 32px rgba(5, 31, 55, 0.28);
+  transform: rotate(-2deg);
+}
+
+.work-card__cta.cactus-work-card__cta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: calc(100% - min(181px, 25.71vw));
+  min-height: min(61px, 8.66vw);
+  align-items: center;
+  justify-content: center;
+  gap: min(9px, 1.28vw);
+  overflow: hidden;
+  background: #fbfbfb;
+  color: #328d2d;
+  font-size: min(24px, 3.41vw);
+  font-weight: 720;
+  line-height: min(30px, 4.26vw);
+}
+
+.work-card__cta.cactus-work-card__cta::before {
+  position: absolute;
+  inset: min(3px, 0.43vw) 0 0;
+  background-color: rgba(47, 52, 58, 0.034);
+  content: "";
+  pointer-events: none;
+  mask-image: url("/bubble-tea-icon.png");
+  mask-repeat: repeat;
+  mask-size: min(25px, 3.55vw) min(28px, 3.98vw);
+  -webkit-mask-image: url("/bubble-tea-icon.png");
+  -webkit-mask-repeat: repeat;
+  -webkit-mask-size: min(25px, 3.55vw) min(28px, 3.98vw);
+}
+
+.work-card__cta.cactus-work-card__cta:active {
+  background: #f5f7f5;
+  color: #2f7f2a;
+  transform: scale(0.99);
+}
+
+.cactus-work-card__cta-label,
+.cactus-work-card__tea-mark {
+  position: relative;
+  z-index: 1;
+}
+
+.cactus-work-card__tea-mark {
+  width: min(18px, 2.56vw);
+  height: min(20px, 2.84vw);
+  background-color: rgba(50, 141, 45, 0.12);
+  mask: url("/bubble-tea-icon.png") center / contain no-repeat;
+  -webkit-mask: url("/bubble-tea-icon.png") center / contain no-repeat;
+}
+
 .work-card__visual {
   position: relative;
   z-index: 1;

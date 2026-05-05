@@ -2,6 +2,7 @@
 
 import { BottomMenu } from "@/components/bottom-menu";
 import { LottieAnimation } from "@/components/lottie-animation";
+import Image from "next/image";
 import { useState } from "react";
 
 const PROJECT_GROUPS = {
@@ -112,11 +113,80 @@ export default function WorksPage() {
 
             <div className="works-list" aria-label="Project cards">
               {projects.map((project) => (
-                <article className="work-card" key={project.id}>
-                  <div className={`work-card__visual ${project.className}`} />
-                  <button className="work-card__cta" type="button">
-                    Watch more
-                  </button>
+                <article
+                  className={`work-card${
+                    project.id === "mine-1" ? " work-card--featured" : ""
+                  }`}
+                  key={project.id}
+                >
+                  {project.id === "mine-1" ? (
+                    <>
+                      <div className="cactus-work-card__visual">
+                        <div className="cactus-work-card__copy">
+                          <h2 className="cactus-work-card__title">
+                            CACTUS ASSISTANT
+                          </h2>
+                          <p className="cactus-work-card__subtitle">
+                            Have your AI assistant right inside Telegram.
+                          </p>
+                          <div
+                            className="cactus-work-card__chips"
+                            aria-hidden="true"
+                          >
+                            <span className="cactus-work-card__chip">
+                              <span className="cactus-work-card__chip-icon">
+                                AI
+                              </span>
+                              Smart
+                            </span>
+                            <span className="cactus-work-card__chip">
+                              <span className="cactus-work-card__chip-icon">
+                                24
+                              </span>
+                              Online
+                            </span>
+                            <span className="cactus-work-card__chip">
+                              <span className="cactus-work-card__chip-icon cactus-work-card__chip-icon--spark" />
+                              Beta
+                            </span>
+                          </div>
+                        </div>
+                        <Image
+                          className="cactus-work-card__avatar"
+                          src="/cactus-assistant-avatar.jpg"
+                          alt=""
+                          width={260}
+                          height={260}
+                          priority
+                        />
+                      </div>
+                      <button
+                        className="work-card__cta cactus-work-card__cta"
+                        type="button"
+                      >
+                        <span
+                          className="cactus-work-card__tea-mark"
+                          aria-hidden="true"
+                        />
+                        <span className="cactus-work-card__cta-label">
+                          Watch More
+                        </span>
+                        <span
+                          className="cactus-work-card__tea-mark"
+                          aria-hidden="true"
+                        />
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div
+                        className={`work-card__visual ${project.className}`}
+                      />
+                      <button className="work-card__cta" type="button">
+                        Watch more
+                      </button>
+                    </>
+                  )}
                 </article>
               ))}
             </div>
