@@ -17,7 +17,7 @@ const BOTTOM_TABS: Array<{
     href: "/works",
     icon: (
       <MenuIcon
-        className="hgi hgi-solid hgi-rounded hgi-source-code-circle"
+        className="hgi hgi-solid hgi-rounded hgi-bubble-chat-spark"
         kind="works"
       />
     ),
@@ -28,7 +28,7 @@ const BOTTOM_TABS: Array<{
     href: "/",
     icon: (
       <MenuIcon
-        className="hgi hgi-solid hgi-rounded hgi-user-circle"
+        className="fa-solid fa-circle-user"
         kind="main"
       />
     ),
@@ -39,7 +39,7 @@ const BOTTOM_TABS: Array<{
     href: "/assistant",
     icon: (
       <MenuIcon
-        className="hgi hgi-solid hgi-rounded hgi-bubble-chat-spark-01"
+        className="fa-jelly-fill fa-regular fa-grid"
         kind="assistant"
       />
     ),
@@ -121,34 +121,35 @@ function MenuIcon({
   );
 }
 
-function WorksGlyph() {
+function MainGlyph() {
   return (
     <>
       <path
-        d="M12 2.25A9.75 9.75 0 1 0 12 21.75 9.75 9.75 0 0 0 12 2.25Zm0 2.25a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15Z"
+        d="M12 2.25a9.75 9.75 0 1 0 0 19.5 9.75 9.75 0 0 0 0-19.5Z"
         fill="currentColor"
-        fillRule="evenodd"
       />
       <path
-        d="M9.18 8.05 5.7 11.1a1.18 1.18 0 0 0 0 1.8l3.48 3.05a1.12 1.12 0 0 0 1.48-1.68L8.2 12l2.46-2.27a1.12 1.12 0 1 0-1.48-1.68Zm5.64 0a1.12 1.12 0 0 0-1.48 1.68L15.8 12l-2.46 2.27a1.12 1.12 0 0 0 1.48 1.68l3.48-3.05a1.18 1.18 0 0 0 0-1.8l-3.48-3.05Z"
-        fill="currentColor"
+        d="M12 6.28a3.14 3.14 0 1 1 0 6.28 3.14 3.14 0 0 1 0-6.28Zm-5.24 11.1c.88-2.82 2.7-4.45 5.24-4.45s4.36 1.63 5.24 4.45a7.38 7.38 0 0 1-10.48 0Z"
+        fill="var(--bottom-menu-glyph-cutout)"
       />
     </>
   );
 }
 
-function MainGlyph() {
+function WorksGlyph() {
   return (
     <>
       <path
-        d="M12 2.25A9.75 9.75 0 1 0 12 21.75 9.75 9.75 0 0 0 12 2.25Zm0 2.25a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15Z"
+        d="M5.98 4.5h9.36a5.32 5.32 0 0 1 5.32 5.32v2.86A5.32 5.32 0 0 1 15.34 18H12.2l-4.02 2.17a.82.82 0 0 1-1.2-.72V18h-1a5.32 5.32 0 0 1-5.32-5.32V9.82A5.32 5.32 0 0 1 5.98 4.5Z"
         fill="currentColor"
-        fillRule="evenodd"
       />
       <path
-        d="M12 6.65a3.15 3.15 0 1 1 0 6.3 3.15 3.15 0 0 1 0-6.3Zm-5.15 10.8c.9-2.8 2.68-4.2 5.15-4.2s4.25 1.4 5.15 4.2a7.05 7.05 0 0 1-10.3 0Z"
+        d="m18.78 2.34.42 1.1 1.1.42a.44.44 0 0 1 0 .82l-1.1.42-.42 1.1a.44.44 0 0 1-.82 0l-.42-1.1-1.1-.42a.44.44 0 0 1 0-.82l1.1-.42.42-1.1a.44.44 0 0 1 .82 0Z"
         fill="currentColor"
       />
+      <circle cx="7.7" cy="11.24" r="1.08" fill="var(--bottom-menu-glyph-cutout)" />
+      <circle cx="11.3" cy="11.24" r="1.08" fill="var(--bottom-menu-glyph-cutout)" />
+      <circle cx="14.9" cy="11.24" r="1.08" fill="var(--bottom-menu-glyph-cutout)" />
     </>
   );
 }
@@ -156,14 +157,10 @@ function MainGlyph() {
 function AssistantGlyph() {
   return (
     <>
-      <path
-        d="M7.1 5.8h8.55a4.72 4.72 0 0 1 4.72 4.72v2.5a4.72 4.72 0 0 1-4.72 4.72H12.2l-3.9 2.12a.86.86 0 0 1-1.27-.76v-1.42A4.72 4.72 0 0 1 2.38 13v-2.5A4.72 4.72 0 0 1 7.1 5.8Zm.22 3.96a1.28 1.28 0 1 0 0 2.56 1.28 1.28 0 0 0 0-2.56Zm4.2 0a1.28 1.28 0 1 0 0 2.56 1.28 1.28 0 0 0 0-2.56Zm4.2 0a1.28 1.28 0 1 0 0 2.56 1.28 1.28 0 0 0 0-2.56Z"
-        fill="currentColor"
-      />
-      <path
-        d="m18.82 2.64.4 1.05 1.05.4a.42.42 0 0 1 0 .78l-1.05.4-.4 1.05a.42.42 0 0 1-.78 0l-.4-1.05-1.05-.4a.42.42 0 0 1 0-.78l1.05-.4.4-1.05a.42.42 0 0 1 .78 0Z"
-        fill="currentColor"
-      />
+      <rect x="3.35" y="3.35" width="7.18" height="7.18" rx="1.72" fill="currentColor" />
+      <rect x="13.47" y="3.35" width="7.18" height="7.18" rx="1.72" fill="currentColor" />
+      <rect x="3.35" y="13.47" width="7.18" height="7.18" rx="1.72" fill="currentColor" />
+      <rect x="13.47" y="13.47" width="7.18" height="7.18" rx="1.72" fill="currentColor" />
     </>
   );
 }

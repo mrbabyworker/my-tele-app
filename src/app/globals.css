@@ -499,19 +499,19 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .bottom-menu__tab {
-  --bottom-menu-icon-disc: rgba(232, 232, 234, 0.95);
-  --bottom-menu-icon-mark: rgba(18, 18, 21, 0.94);
-  --bottom-menu-glyph-size: min(28px, 3.98vw);
+  --bottom-menu-icon-mark: rgba(239, 242, 243, 0.88);
+  --bottom-menu-glyph-cutout: rgba(17, 19, 21, 0.82);
+  --bottom-menu-glyph-size: min(34px, 4.83vw);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: min(6px, 0.85vw);
+  gap: min(7px, 0.99vw);
   min-width: 0;
   padding: min(15px, 2.13vw) min(8px, 1.14vw) min(12px, 1.7vw);
   border: 0;
   background: transparent;
-  color: rgba(232, 232, 235, 0.9);
+  color: var(--bottom-menu-icon-mark);
   cursor: pointer;
   outline: none;
   text-decoration: none;
@@ -1111,9 +1111,8 @@ body:has(.profile-screen) .bottom-menu {
   .work-card__cta,
   .bottom-menu__indicator,
   .bottom-menu__tab,
-  .bottom-menu__icon::before,
   .bottom-menu__icon-glyph,
-  .bottom-menu__icon-disc {
+  .bottom-menu__label {
     transition: none;
   }
 }
@@ -1128,10 +1127,10 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .bottom-menu__tab[aria-selected="true"] {
-  --bottom-menu-icon-disc: rgba(232, 232, 234, 0);
-  --bottom-menu-icon-mark: #34b9c8;
-  --bottom-menu-glyph-size: min(37px, 5.26vw);
-  color: #34b9c8;
+  --bottom-menu-icon-mark: #49d0d9;
+  --bottom-menu-glyph-cutout: rgba(10, 20, 23, 0.86);
+  --bottom-menu-glyph-size: min(39px, 5.54vw);
+  color: #49d0d9;
   opacity: 1;
 }
 
@@ -1141,20 +1140,7 @@ body:has(.profile-screen) .bottom-menu {
   width: min(42px, 5.97vw);
   height: min(42px, 5.97vw);
   place-items: center;
-  border-radius: 50%;
   color: var(--bottom-menu-icon-mark);
-}
-
-.bottom-menu__icon::before {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: var(--bottom-menu-icon-disc);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
-  content: "";
-  transition:
-    background-color 220ms ease,
-    opacity 220ms ease;
 }
 
 .bottom-menu__icon i {
@@ -1172,6 +1158,7 @@ body:has(.profile-screen) .bottom-menu {
   width: var(--bottom-menu-glyph-size);
   height: var(--bottom-menu-glyph-size);
   color: currentColor;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
   transition:
     width 220ms ease,
     height 220ms ease,
@@ -1182,23 +1169,18 @@ body:has(.profile-screen) .bottom-menu {
   fill: currentColor;
 }
 
-.bottom-menu__icon-disc {
-  fill: var(--bottom-menu-icon-disc);
-  transition:
-    fill 220ms ease,
-    opacity 220ms ease;
-}
-
 .bottom-menu__label {
   overflow: hidden;
   max-width: 100%;
   color: currentColor;
-  font-size: min(18px, 2.56vw);
-  font-weight: 650;
-  line-height: min(22px, 3.13vw);
+  font-size: min(19px, 2.7vw);
+  font-weight: 760;
+  line-height: min(23px, 3.27vw);
   letter-spacing: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 280ms ease;
 }
 
 @supports not ((backdrop-filter: blur(1px))) {
