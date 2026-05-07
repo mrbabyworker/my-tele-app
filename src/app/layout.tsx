@@ -6,6 +6,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "My Telegram Mini App",
   description: "Personal Telegram Mini App",
+  icons: {
+    icon: "/memoji-avatar.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -22,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" suppressHydrationWarning>
       <head>
         <Script
           src="https://telegram.org/js/telegram-web-app.js"

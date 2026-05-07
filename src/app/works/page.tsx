@@ -3,7 +3,7 @@
 import { BottomMenu } from "@/components/bottom-menu";
 import { LottieAnimation } from "@/components/lottie-animation";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState, type UIEvent } from "react";
 
 const PROJECT_GROUPS = {
   mine: [
@@ -54,8 +54,24 @@ const PROJECT_GROUPS = {
 
 type Segment = keyof typeof PROJECT_GROUPS;
 
+const CACTUS_ASSISTANT_DETAILS = [
+  "Cactus Assistant is a Telegram-native AI companion built for fast, natural work inside the chat environment you already use every day.",
+  "It helps with ideas, drafts, explanations, planning, translations, coding questions, and quick answers without forcing you to leave Telegram or switch context.",
+  "The assistant is designed to feel calm and personal: short requests stay quick, complex questions can unfold into deeper conversations, and every response is tuned for mobile reading.",
+  "Cactus Assistant also supports practical project work. You can shape prompts, polish messages, summarize information, prepare tasks, and turn scattered thoughts into clean next steps.",
+  "The interface keeps the experience lightweight and premium, with a friendly visual identity, smooth motion, and controls that feel native to a Telegram mini app.",
+  "For creators, students, and builders, it becomes a small command center for turning rough notes into useful output before the idea disappears.",
+  "Every detail is shaped around speed: open the assistant, ask, refine, continue, and return to the conversation with less friction than a separate AI tool.",
+  "The goal is simple: keep an intelligent assistant close enough to become part of your everyday rhythm, while preserving the speed and ease of a conversation.",
+];
+
 export default function WorksPage() {
   const [activeSegment, setActiveSegment] = useState<Segment>("mine");
+  const [isProjectDetailsMounted, setIsProjectDetailsMounted] =
+    useState(false);
+  const [isProjectDetailsOpen, setIsProjectDetailsOpen] = useState(false);
+  const [isProjectDetailsScrolled, setIsProjectDetailsScrolled] =
+    useState(false);
   const projects = PROJECT_GROUPS[activeSegment];
 
   function selectSegment(segment: Segment) {
@@ -65,6 +81,50 @@ export default function WorksPage() {
 
     setActiveSegment(segment);
   }
+
+  function openProjectDetails() {
+    window.Telegram?.WebApp.HapticFeedback?.impactOccurred?.("light");
+    setIsProjectDetailsScrolled(false);
+    setIsProjectDetailsMounted(true);
+    window.requestAnimationFrame(() => setIsProjectDetailsOpen(true));
+  }
+
+  function closeProjectDetails() {
+    window.Telegram?.WebApp.HapticFeedback?.impactOccurred?.("light");
+    setIsProjectDetailsOpen(false);
+  }
+
+  function handleProjectDetailsScroll(event: UIEvent<HTMLDivElement>) {
+    setIsProjectDetailsScrolled(event.currentTarget.scrollTop > 4);
+  }
+
+  useEffect(() => {
+    if (!isProjectDetailsMounted || isProjectDetailsOpen) {
+      return;
+    }
+
+    const unmountTimer = window.setTimeout(() => {
+      setIsProjectDetailsMounted(false);
+    }, 540);
+
+    return () => window.clearTimeout(unmountTimer);
+  }, [isProjectDetailsMounted, isProjectDetailsOpen]);
+
+  useEffect(() => {
+    if (!isProjectDetailsOpen) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsProjectDetailsOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isProjectDetailsOpen]);
 
   return (
     <>
@@ -163,6 +223,7 @@ export default function WorksPage() {
                       <button
                         className="work-card__cta cactus-work-card__cta"
                         type="button"
+                        onClick={openProjectDetails}
                       >
                         <span
                           className="cactus-work-card__tea-mark"
@@ -196,6 +257,87 @@ export default function WorksPage() {
         </section>
       </main>
       <BottomMenu activeTab="works" />
+
+      {isProjectDetailsMounted ? (
+        <div
+          className={`project-details-modal${
+            isProjectDetailsOpen ? " project-details-modal--open" : ""
+          }`}
+          aria-hidden={!isProjectDetailsOpen}
+        >
+          <button
+            className="project-details-modal__backdrop"
+            type="button"
+            aria-label="Close project details"
+            onClick={closeProjectDetails}
+          />
+
+          <section
+            className="project-details-modal__sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-details-title"
+            aria-describedby="project-details-description"
+          >
+            <header className="project-details-modal__header">
+              <button
+                className="project-details-modal__close"
+                type="button"
+                aria-label="Close project details"
+                onClick={closeProjectDetails}
+              >
+                <span aria-hidden="true" />
+              </button>
+
+              <h2
+                className="project-details-modal__title"
+                id="project-details-title"
+              >
+                Cactus Assistant
+              </h2>
+            </header>
+
+            <div
+              className={`project-details-modal__scroll-shell${
+                isProjectDetailsScrolled
+                  ? " project-details-modal__scroll-shell--scrolled"
+                  : ""
+              }`}
+            >
+              <span
+                className="project-details-modal__fade project-details-modal__fade--top"
+                aria-hidden="true"
+              />
+              <div
+                className="project-details-modal__body"
+                id="project-details-description"
+                tabIndex={0}
+                onScroll={handleProjectDetailsScroll}
+              >
+                {CACTUS_ASSISTANT_DETAILS.map((paragraph) => (
+                  <p className="project-details-modal__paragraph" key={paragraph}>
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+              <span
+                className="project-details-modal__fade project-details-modal__fade--bottom"
+                aria-hidden="true"
+              />
+            </div>
+
+            <footer className="project-details-modal__footer">
+              <button
+                className="project-details-modal__confirm"
+                type="button"
+                onClick={closeProjectDetails}
+              >
+                Understood
+              </button>
+            </footer>
+          </section>
+        </div>
+      ) : null}
     </>
   );
 }
