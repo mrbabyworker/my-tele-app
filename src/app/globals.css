@@ -126,7 +126,7 @@ nextjs-portal {
   left: 0;
   z-index: 8;
   display: block;
-  height: calc(var(--bottom-menu-offset) + min(336px, 47.73vw));
+  height: calc(var(--bottom-menu-offset) + min(150px, 21.31vw));
   background:
     linear-gradient(
       180deg,
