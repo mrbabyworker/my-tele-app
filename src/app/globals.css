@@ -1285,16 +1285,16 @@ body:has(.profile-screen) .bottom-menu {
   width: 100%;
   max-width: min(650px, 92.33vw);
   margin: 0 auto;
-  color: #f6f6f8;
-  font-size: min(30px, 4.26vw);
-  font-weight: 735;
-  line-height: min(40px, 5.68vw);
+  color: #a7a7ae;
+  font-size: min(26px, 3.69vw);
+  font-weight: 650;
+  line-height: min(34px, 4.83vw);
   letter-spacing: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .project-details-modal__paragraph + .project-details-modal__paragraph {
-  margin-top: min(27px, 3.84vw);
+  margin-top: min(30px, 4.26vw);
 }
 
 .project-details-modal__fade {
@@ -1307,12 +1307,12 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .project-details-modal__fade--top {
-  top: min(94px, 13.35vw);
-  height: min(66px, 9.38vw);
+  top: min(110px, 15.63vw);
+  height: clamp(50px, 7.1vw, 64px);
   background: linear-gradient(
     180deg,
-    var(--project-sheet-bg) 0%,
-    rgba(25, 26, 26, 0.98) 82%,
+    rgba(25, 26, 26, 0.74) 0%,
+    rgba(25, 26, 26, 0.42) 52%,
     rgba(25, 26, 26, 0) 100%
   );
   opacity: 0;
@@ -1326,12 +1326,12 @@ body:has(.profile-screen) .bottom-menu {
 
 .project-details-modal__fade--bottom {
   bottom: var(--project-sheet-footer-height);
-  height: min(112px, 15.91vw);
+  height: clamp(42px, 6vw, 54px);
   background: linear-gradient(
     180deg,
     rgba(25, 26, 26, 0) 0%,
-    rgba(25, 26, 26, 0.72) 58%,
-    var(--project-sheet-bg) 100%
+    rgba(25, 26, 26, 0.28) 62%,
+    rgba(25, 26, 26, 0.62) 100%
   );
 }
 

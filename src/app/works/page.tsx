@@ -55,14 +55,10 @@ const PROJECT_GROUPS = {
 type Segment = keyof typeof PROJECT_GROUPS;
 
 const CACTUS_ASSISTANT_DETAILS = [
-  "Cactus Assistant is a Telegram-native AI companion built for fast, natural work inside the chat environment you already use every day.",
-  "It helps with ideas, drafts, explanations, planning, translations, coding questions, and quick answers without forcing you to leave Telegram or switch context.",
-  "The assistant is designed to feel calm and personal: short requests stay quick, complex questions can unfold into deeper conversations, and every response is tuned for mobile reading.",
-  "Cactus Assistant also supports practical project work. You can shape prompts, polish messages, summarize information, prepare tasks, and turn scattered thoughts into clean next steps.",
-  "The interface keeps the experience lightweight and premium, with a friendly visual identity, smooth motion, and controls that feel native to a Telegram mini app.",
-  "For creators, students, and builders, it becomes a small command center for turning rough notes into useful output before the idea disappears.",
-  "Every detail is shaped around speed: open the assistant, ask, refine, continue, and return to the conversation with less friction than a separate AI tool.",
-  "The goal is simple: keep an intelligent assistant close enough to become part of your everyday rhythm, while preserving the speed and ease of a conversation.",
+  "Cactus Assistant is a Telegram-native AI companion for quick, natural work inside the chat environment you already use every day. It helps with ideas, drafts, explanations, planning, translations, coding questions, and fast answers without forcing you to leave Telegram or switch context. The assistant is always close to the conversation, so a useful response feels only one tap away.",
+  "The assistant is designed to feel calm and personal: short requests stay quick, complex questions can unfold into deeper conversations, and every response is tuned for comfortable mobile reading. You can shape prompts, polish messages, summarize information, prepare tasks, and turn scattered thoughts into clean next steps.",
+  "For creators, students, and builders, Cactus Assistant becomes a small command center for turning rough notes into useful output before the idea disappears. It keeps practical project work close to the conversation, so you can refine a message, prepare an idea, or organize a task without opening another tool.",
+  "The interface stays lightweight and premium, with a friendly visual identity, smooth motion, and controls that feel native to a Telegram mini app. The goal is simple: keep an intelligent assistant close enough to become part of your everyday rhythm while preserving the speed and ease of a conversation. Everything is shaped to stay quiet, readable, and useful on a mobile screen.",
 ];
 
 export default function WorksPage() {
