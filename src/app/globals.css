@@ -83,7 +83,7 @@ nextjs-portal {
   --bottom-fade-a1: 0.07;
   --bottom-fade-a2: 0.2;
   --bottom-fade-a3: 0.38;
-  --bottom-fade-a4: 0.56;
+  --bottom-fade-a4: 0.62;
   --bottom-fade-rgb: 38, 84, 98;
   width: 100vw;
   height: 100dvh;
@@ -500,7 +500,7 @@ body:has(.profile-screen) .bottom-menu {
 
 .bottom-menu__tab {
   --bottom-menu-icon-mark: rgba(244, 247, 249, 0.92);
-  --bottom-menu-icon-size: min(52px, 7.39vw);
+  --bottom-menu-icon-size: min(48px, 6.82vw);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -526,7 +526,7 @@ body:has(.profile-screen) .bottom-menu {
   --bottom-fade-a1: 0.04;
   --bottom-fade-a2: 0.13;
   --bottom-fade-a3: 0.24;
-  --bottom-fade-a4: 0.34;
+  --bottom-fade-a4: 0.4;
   --bottom-fade-rgb: 0, 0, 0;
   position: fixed;
   inset: 0;
@@ -1421,7 +1421,7 @@ body:has(.profile-screen) .bottom-menu {
 
 .bottom-menu__tab[aria-selected="true"] {
   --bottom-menu-icon-mark: #43c9cb;
-  --bottom-menu-icon-size: min(54px, 7.67vw);
+  --bottom-menu-icon-size: min(50px, 7.1vw);
   color: #43c9cb;
   opacity: 1;
 }
