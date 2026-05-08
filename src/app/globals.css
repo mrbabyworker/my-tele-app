@@ -80,11 +80,11 @@ nextjs-portal {
 }
 
 .profile-screen {
-  --bottom-fade-a1: 0.07;
-  --bottom-fade-a2: 0.2;
-  --bottom-fade-a3: 0.38;
-  --bottom-fade-a4: 0.62;
-  --bottom-fade-rgb: 38, 84, 98;
+  --bottom-fade-a1: 0.08;
+  --bottom-fade-a2: 0.24;
+  --bottom-fade-a3: 0.5;
+  --bottom-fade-a4: 0.82;
+  --bottom-fade-rgb: 34, 80, 94;
   width: 100vw;
   height: 100dvh;
   min-height: 100dvh;
@@ -126,7 +126,7 @@ nextjs-portal {
   left: 0;
   z-index: 8;
   display: block;
-  height: calc(var(--bottom-menu-offset) + min(276px, 39.2vw));
+  height: calc(var(--bottom-menu-offset) + min(336px, 47.73vw));
   background:
     linear-gradient(
       180deg,
@@ -523,10 +523,10 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .works-screen {
-  --bottom-fade-a1: 0.04;
-  --bottom-fade-a2: 0.13;
-  --bottom-fade-a3: 0.24;
-  --bottom-fade-a4: 0.4;
+  --bottom-fade-a1: 0.05;
+  --bottom-fade-a2: 0.2;
+  --bottom-fade-a3: 0.42;
+  --bottom-fade-a4: 0.72;
   --bottom-fade-rgb: 0, 0, 0;
   position: fixed;
   inset: 0;
