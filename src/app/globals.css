@@ -1375,8 +1375,11 @@ body:has(.profile-screen) .bottom-menu {
   height: clamp(50px, 7.1vw, 64px);
   background: linear-gradient(
     180deg,
-    rgba(25, 26, 26, 0.74) 0%,
-    rgba(25, 26, 26, 0.42) 52%,
+    rgba(25, 26, 26, 0.64) 0%,
+    rgba(25, 26, 26, 0.54) 18%,
+    rgba(25, 26, 26, 0.38) 44%,
+    rgba(25, 26, 26, 0.21) 68%,
+    rgba(25, 26, 26, 0.08) 88%,
     rgba(25, 26, 26, 0) 100%
   );
   opacity: 0;
@@ -1394,8 +1397,11 @@ body:has(.profile-screen) .bottom-menu {
   background: linear-gradient(
     180deg,
     rgba(25, 26, 26, 0) 0%,
-    rgba(25, 26, 26, 0.28) 62%,
-    rgba(25, 26, 26, 0.62) 100%
+    rgba(25, 26, 26, 0.07) 18%,
+    rgba(25, 26, 26, 0.18) 42%,
+    rgba(25, 26, 26, 0.32) 66%,
+    rgba(25, 26, 26, 0.48) 86%,
+    rgba(25, 26, 26, 0.58) 100%
   );
 }
 
