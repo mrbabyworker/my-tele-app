@@ -1198,6 +1198,15 @@ body:has(.profile-screen) .bottom-menu {
   --project-sheet-bg: #191a1a;
   --project-sheet-content-top: min(136px, 19.32vw);
   --project-sheet-footer-height: min(178px, 25.28vw);
+  --project-sheet-top-fade-height: clamp(50px, 7.1vw, 64px);
+  --project-sheet-top-mask-height: var(--project-sheet-top-fade-height);
+  --project-sheet-top-mask-soft: clamp(10px, 1.42vw, 13px);
+  --project-sheet-top-mask-mid: clamp(23px, 3.27vw, 30px);
+  --project-sheet-top-mask-deep: clamp(36px, 5.11vw, 46px);
+  --project-sheet-bottom-fade-height: clamp(42px, 6vw, 54px);
+  --project-sheet-bottom-mask-deep: clamp(29px, 4.08vw, 37px);
+  --project-sheet-bottom-mask-mid: clamp(18px, 2.52vw, 23px);
+  --project-sheet-bottom-mask-soft: clamp(8px, 1.2vw, 11px);
   position: fixed;
   right: 0;
   bottom: 0;
@@ -1338,7 +1347,54 @@ body:has(.profile-screen) .bottom-menu {
   scrollbar-width: none;
   text-align: center;
   touch-action: pan-y;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 calc(100% - var(--project-sheet-bottom-fade-height)),
+    rgba(0, 0, 0, 0.72) calc(100% - var(--project-sheet-bottom-mask-deep)),
+    rgba(0, 0, 0, 0.42) calc(100% - var(--project-sheet-bottom-mask-mid)),
+    rgba(0, 0, 0, 0.16) calc(100% - var(--project-sheet-bottom-mask-soft)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 calc(100% - var(--project-sheet-bottom-fade-height)),
+    rgba(0, 0, 0, 0.72) calc(100% - var(--project-sheet-bottom-mask-deep)),
+    rgba(0, 0, 0, 0.42) calc(100% - var(--project-sheet-bottom-mask-mid)),
+    rgba(0, 0, 0, 0.16) calc(100% - var(--project-sheet-bottom-mask-soft)),
+    transparent 100%
+  );
   -webkit-overflow-scrolling: touch;
+}
+
+.project-details-modal__scroll-shell--scrolled .project-details-modal__body {
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) var(--project-sheet-top-mask-soft),
+    rgba(0, 0, 0, 0.45) var(--project-sheet-top-mask-mid),
+    rgba(0, 0, 0, 0.76) var(--project-sheet-top-mask-deep),
+    #000 var(--project-sheet-top-mask-height),
+    #000 calc(100% - var(--project-sheet-bottom-fade-height)),
+    rgba(0, 0, 0, 0.72) calc(100% - var(--project-sheet-bottom-mask-deep)),
+    rgba(0, 0, 0, 0.42) calc(100% - var(--project-sheet-bottom-mask-mid)),
+    rgba(0, 0, 0, 0.16) calc(100% - var(--project-sheet-bottom-mask-soft)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) var(--project-sheet-top-mask-soft),
+    rgba(0, 0, 0, 0.45) var(--project-sheet-top-mask-mid),
+    rgba(0, 0, 0, 0.76) var(--project-sheet-top-mask-deep),
+    #000 var(--project-sheet-top-mask-height),
+    #000 calc(100% - var(--project-sheet-bottom-fade-height)),
+    rgba(0, 0, 0, 0.72) calc(100% - var(--project-sheet-bottom-mask-deep)),
+    rgba(0, 0, 0, 0.42) calc(100% - var(--project-sheet-bottom-mask-mid)),
+    rgba(0, 0, 0, 0.16) calc(100% - var(--project-sheet-bottom-mask-soft)),
+    transparent 100%
+  );
 }
 
 .project-details-modal__body::-webkit-scrollbar {
@@ -1372,14 +1428,16 @@ body:has(.profile-screen) .bottom-menu {
 
 .project-details-modal__fade--top {
   top: min(110px, 15.63vw);
-  height: clamp(50px, 7.1vw, 64px);
+  height: var(--project-sheet-top-fade-height);
   background: linear-gradient(
     180deg,
-    rgba(25, 26, 26, 0.64) 0%,
-    rgba(25, 26, 26, 0.54) 18%,
-    rgba(25, 26, 26, 0.38) 44%,
-    rgba(25, 26, 26, 0.21) 68%,
-    rgba(25, 26, 26, 0.08) 88%,
+    rgba(25, 26, 26, 1) 0%,
+    rgba(25, 26, 26, 0.98) 14%,
+    rgba(25, 26, 26, 0.88) 31%,
+    rgba(25, 26, 26, 0.69) 49%,
+    rgba(25, 26, 26, 0.43) 68%,
+    rgba(25, 26, 26, 0.17) 87%,
+    rgba(25, 26, 26, 0.05) 96%,
     rgba(25, 26, 26, 0) 100%
   );
   opacity: 0;
@@ -1393,15 +1451,17 @@ body:has(.profile-screen) .bottom-menu {
 
 .project-details-modal__fade--bottom {
   bottom: var(--project-sheet-footer-height);
-  height: clamp(42px, 6vw, 54px);
+  height: var(--project-sheet-bottom-fade-height);
   background: linear-gradient(
     180deg,
     rgba(25, 26, 26, 0) 0%,
-    rgba(25, 26, 26, 0.07) 18%,
-    rgba(25, 26, 26, 0.18) 42%,
-    rgba(25, 26, 26, 0.32) 66%,
-    rgba(25, 26, 26, 0.48) 86%,
-    rgba(25, 26, 26, 0.58) 100%
+    rgba(25, 26, 26, 0.05) 8%,
+    rgba(25, 26, 26, 0.17) 23%,
+    rgba(25, 26, 26, 0.36) 42%,
+    rgba(25, 26, 26, 0.61) 62%,
+    rgba(25, 26, 26, 0.82) 80%,
+    rgba(25, 26, 26, 0.96) 94%,
+    rgba(25, 26, 26, 1) 100%
   );
 }
 
