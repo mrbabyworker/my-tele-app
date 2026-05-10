@@ -1334,14 +1334,17 @@ body:has(.profile-screen) .bottom-menu {
 
 .project-details-modal__body {
   position: absolute;
-  top: var(--project-sheet-content-top);
+  top: calc(
+    var(--project-sheet-content-top) - var(--project-sheet-top-fade-height)
+  );
   right: 0;
   bottom: var(--project-sheet-footer-height);
   left: 0;
   z-index: 1;
   overflow-y: auto;
   overscroll-behavior-y: contain;
-  padding: 0 min(27px, 3.84vw) min(44px, 6.25vw);
+  padding: var(--project-sheet-top-fade-height) min(27px, 3.84vw)
+    min(44px, 6.25vw);
   outline: none;
   pointer-events: auto;
   scrollbar-width: none;
@@ -1427,7 +1430,9 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .project-details-modal__fade--top {
-  top: min(110px, 15.63vw);
+  top: calc(
+    var(--project-sheet-content-top) - var(--project-sheet-top-fade-height)
+  );
   height: var(--project-sheet-top-fade-height);
   background: linear-gradient(
     180deg,
