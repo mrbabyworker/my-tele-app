@@ -1198,7 +1198,7 @@ body:has(.profile-screen) .bottom-menu {
   --project-sheet-bg: #191a1a;
   --project-sheet-content-top: min(136px, 19.32vw);
   --project-sheet-footer-height: min(178px, 25.28vw);
-  --project-sheet-top-fade-height: clamp(50px, 7.1vw, 64px);
+  --project-sheet-top-fade-height: var(--project-sheet-content-top);
   --project-sheet-top-mask-height: var(--project-sheet-top-fade-height);
   --project-sheet-top-mask-soft: clamp(10px, 1.42vw, 13px);
   --project-sheet-top-mask-mid: clamp(23px, 3.27vw, 30px);
