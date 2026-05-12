@@ -123,12 +123,12 @@ nextjs-portal {
   background: linear-gradient(
     180deg,
     rgba(var(--top-fade-rgb), 1) 0%,
-    rgba(var(--top-fade-rgb), 0.96) 8%,
-    rgba(var(--top-fade-rgb), 0.69) 18%,
-    rgba(var(--top-fade-rgb), 0.69) 76%,
-    rgba(var(--top-fade-rgb), 0.43) 86%,
-    rgba(var(--top-fade-rgb), 0.17) 94%,
-    rgba(var(--top-fade-rgb), 0.05) 98%,
+    rgba(var(--top-fade-rgb), 0.98) 14%,
+    rgba(var(--top-fade-rgb), 0.88) 31%,
+    rgba(var(--top-fade-rgb), 0.69) 49%,
+    rgba(var(--top-fade-rgb), 0.43) 68%,
+    rgba(var(--top-fade-rgb), 0.17) 87%,
+    rgba(var(--top-fade-rgb), 0.05) 96%,
     rgba(var(--top-fade-rgb), 0) 100%
   );
   content: "";
