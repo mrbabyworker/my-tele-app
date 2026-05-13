@@ -602,7 +602,134 @@ body:has(.profile-screen) .bottom-menu {
   text-align: center;
 }
 
+.works-hero__badges {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% + min(38px, 5.4vw));
+  margin-top: min(55px, 7.81vw);
+}
+
+.works-hero-badge {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: min(11px, 1.56vw);
+  height: min(56px, 7.95vw);
+  max-width: min(246px, 34.94vw);
+  padding: 0 min(21px, 2.98vw);
+  overflow: hidden;
+  border: 1px solid #333333;
+  border-radius: 999px;
+  background: #272727;
+  background-clip: padding-box;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.012),
+    0 4px 8px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.028),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  touch-action: manipulation;
+  -webkit-backdrop-filter: blur(18px) saturate(106%);
+  backdrop-filter: blur(18px) saturate(106%);
+  transition:
+    transform 130ms ease,
+    background-color 130ms ease,
+    border-color 130ms ease,
+    opacity 130ms ease;
+}
+
+.works-hero-badge::before,
+.works-hero-badge::after {
+  position: absolute;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+.works-hero-badge::before {
+  inset: -1px;
+  z-index: -1;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.works-hero-badge::after {
+  inset: 0;
+  z-index: 0;
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.052),
+    inset 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+.works-hero-badge--info {
+  padding-right: min(19px, 2.7vw);
+}
+
+.works-hero-badge--employment {
+  padding-left: min(19px, 2.7vw);
+}
+
+.works-hero-badge:active {
+  border-color: #383838;
+  background: #2a2a2a;
+  opacity: 0.94;
+  transform: scale(0.97);
+}
+
+.works-hero-badge:focus-visible {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 0 0 3px rgba(255, 255, 255, 0.18),
+    0 7px 15px rgba(0, 0, 0, 0.18);
+}
+
+.works-hero-badge__label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  overflow: hidden;
+  min-width: 0;
+  color: #ffffff;
+  font-size: min(23px, 3.27vw);
+  font-weight: 690;
+  line-height: min(28px, 3.98vw);
+  letter-spacing: 0;
+  text-shadow: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.works-hero-badge__icon {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 var(--works-badge-icon-size);
+  width: var(--works-badge-icon-size);
+  height: var(--works-badge-icon-size);
+  background: rgba(255, 255, 255, 0.96);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.24));
+  mask: var(--works-badge-icon) center / contain no-repeat;
+  -webkit-mask: var(--works-badge-icon) center / contain no-repeat;
+  transform: translateY(0.2px);
+}
+
+.works-hero-badge__icon--question {
+  --works-badge-icon: url("/works-badge-icons/question-mark.png");
+  --works-badge-icon-size: min(26px, 3.69vw);
+}
+
+.works-hero-badge__icon--employment {
+  --works-badge-icon: url("/works-badge-icons/employment.png");
+  --works-badge-icon-size: min(26px, 3.69vw);
+}
+
 .works-hero__mascot {
+  margin-top: min(69px, 9.8vw);
   width: min(214px, 30.4vw);
   height: min(214px, 30.4vw);
   filter: drop-shadow(0 7px 17px rgba(84, 153, 255, 0.2));
@@ -1526,6 +1653,7 @@ body:has(.profile-screen) .bottom-menu {
 @media (prefers-reduced-motion: reduce) {
   .works-segmented__pill,
   .works-segmented__button,
+  .works-hero-badge,
   .work-card__cta,
   .project-details-modal__backdrop,
   .project-details-modal__sheet,

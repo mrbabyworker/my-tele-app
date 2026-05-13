@@ -127,6 +127,10 @@ export default function WorksPage() {
     setIsProjectDetailsOpen(false);
   }
 
+  function notifyHeroBadgeTap() {
+    window.Telegram?.WebApp.HapticFeedback?.impactOccurred?.("light");
+  }
+
   function handleProjectDetailsScroll(event: UIEvent<HTMLDivElement>) {
     setIsProjectDetailsScrolled(event.currentTarget.scrollTop > 4);
   }
@@ -165,6 +169,32 @@ export default function WorksPage() {
         <section className="works-frame" aria-label="My Works">
           <div className="works-content">
             <header className="works-hero">
+              <div className="works-hero__badges" aria-label="My Works details">
+                <button
+                  className="works-hero-badge works-hero-badge--info"
+                  type="button"
+                  onClick={notifyHeroBadgeTap}
+                >
+                  <span className="works-hero-badge__label">What is it?</span>
+                  <span
+                    className="works-hero-badge__icon works-hero-badge__icon--question"
+                    aria-hidden="true"
+                  />
+                </button>
+
+                <button
+                  className="works-hero-badge works-hero-badge--employment"
+                  type="button"
+                  onClick={notifyHeroBadgeTap}
+                >
+                  <span
+                    className="works-hero-badge__icon works-hero-badge__icon--employment"
+                    aria-hidden="true"
+                  />
+                  <span className="works-hero-badge__label">Employment</span>
+                </button>
+              </div>
+
               <LottieAnimation
                 className="works-hero__mascot"
                 path="/fluffy-mascot.tgs.json"
