@@ -3,7 +3,13 @@
 import { BottomMenu } from "@/components/bottom-menu";
 import { LottieAnimation } from "@/components/lottie-animation";
 import Image from "next/image";
-import { useEffect, useState, type UIEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type PointerEvent,
+  type UIEvent,
+} from "react";
 
 type ProjectTheme = "cactus" | "aurora" | "coral" | "violet" | "mint";
 
@@ -100,11 +106,15 @@ const CACTUS_ASSISTANT_DETAILS = [
 
 export default function WorksPage() {
   const [activeSegment, setActiveSegment] = useState<Segment>("mine");
+  const [isWorksInfoMounted, setIsWorksInfoMounted] = useState(false);
+  const [isWorksInfoOpen, setIsWorksInfoOpen] = useState(false);
   const [isProjectDetailsMounted, setIsProjectDetailsMounted] =
     useState(false);
   const [isProjectDetailsOpen, setIsProjectDetailsOpen] = useState(false);
   const [isProjectDetailsScrolled, setIsProjectDetailsScrolled] =
     useState(false);
+  const worksInfoDragStartY = useRef<number | null>(null);
+  const worksInfoDragOffset = useRef(0);
   const projects = PROJECT_GROUPS[activeSegment];
 
   function selectSegment(segment: Segment) {
@@ -127,13 +137,91 @@ export default function WorksPage() {
     setIsProjectDetailsOpen(false);
   }
 
+  function openWorksInfo() {
+    window.Telegram?.WebApp.HapticFeedback?.impactOccurred?.("light");
+    setIsWorksInfoMounted(true);
+    window.requestAnimationFrame(() => setIsWorksInfoOpen(true));
+  }
+
+  function closeWorksInfo() {
+    window.Telegram?.WebApp.HapticFeedback?.impactOccurred?.("light");
+    setIsWorksInfoOpen(false);
+  }
+
   function notifyHeroBadgeTap() {
     window.Telegram?.WebApp.HapticFeedback?.impactOccurred?.("light");
+  }
+
+  function handleWorksInfoPointerDown(event: PointerEvent<HTMLElement>) {
+    if (event.pointerType === "mouse" && event.button !== 0) {
+      return;
+    }
+
+    const target = event.target as HTMLElement;
+    if (target.closest("button")) {
+      return;
+    }
+
+    worksInfoDragStartY.current = event.clientY;
+    worksInfoDragOffset.current = 0;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function handleWorksInfoPointerMove(event: PointerEvent<HTMLElement>) {
+    if (worksInfoDragStartY.current === null) {
+      return;
+    }
+
+    const offset = Math.max(0, event.clientY - worksInfoDragStartY.current);
+    worksInfoDragOffset.current = offset;
+    event.currentTarget.style.setProperty(
+      "--works-info-drag-offset",
+      `${offset}px`,
+    );
+  }
+
+  function handleWorksInfoPointerUp(event: PointerEvent<HTMLElement>) {
+    if (worksInfoDragStartY.current === null) {
+      return;
+    }
+
+    const sheet = event.currentTarget;
+    worksInfoDragStartY.current = null;
+
+    if (worksInfoDragOffset.current > 82) {
+      sheet.style.removeProperty("--works-info-drag-offset");
+      closeWorksInfo();
+      return;
+    }
+
+    worksInfoDragOffset.current = 0;
+    sheet.style.setProperty("--works-info-drag-offset", "0px");
+    window.setTimeout(() => {
+      sheet.style.removeProperty("--works-info-drag-offset");
+    }, 260);
+  }
+
+  function handleWorksInfoPointerCancel(event: PointerEvent<HTMLElement>) {
+    worksInfoDragStartY.current = null;
+    worksInfoDragOffset.current = 0;
+    event.currentTarget.style.removeProperty("--works-info-drag-offset");
   }
 
   function handleProjectDetailsScroll(event: UIEvent<HTMLDivElement>) {
     setIsProjectDetailsScrolled(event.currentTarget.scrollTop > 4);
   }
+
+  useEffect(() => {
+    if (!isWorksInfoMounted || isWorksInfoOpen) {
+      return;
+    }
+
+    const unmountTimer = window.setTimeout(() => {
+      setIsWorksInfoMounted(false);
+    }, 540);
+
+    return () => window.clearTimeout(unmountTimer);
+  }, [isWorksInfoMounted, isWorksInfoOpen]);
 
   useEffect(() => {
     if (!isProjectDetailsMounted || isProjectDetailsOpen) {
@@ -146,6 +234,22 @@ export default function WorksPage() {
 
     return () => window.clearTimeout(unmountTimer);
   }, [isProjectDetailsMounted, isProjectDetailsOpen]);
+
+  useEffect(() => {
+    if (!isWorksInfoOpen) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsWorksInfoOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isWorksInfoOpen]);
 
   useEffect(() => {
     if (!isProjectDetailsOpen) {
@@ -173,7 +277,7 @@ export default function WorksPage() {
                 <button
                   className="works-hero-badge works-hero-badge--info"
                   type="button"
-                  onClick={notifyHeroBadgeTap}
+                  onClick={openWorksInfo}
                 >
                   <span className="works-hero-badge__label">What is it?</span>
                   <span
@@ -249,6 +353,163 @@ export default function WorksPage() {
         </section>
       </main>
       <BottomMenu activeTab="works" />
+
+      {isWorksInfoMounted ? (
+        <div
+          className={`works-info-modal${
+            isWorksInfoOpen ? " works-info-modal--open" : ""
+          }`}
+          aria-hidden={!isWorksInfoOpen}
+        >
+          <button
+            className="works-info-modal__backdrop"
+            type="button"
+            aria-label="Close My Works information"
+            onClick={closeWorksInfo}
+          />
+
+          <section
+            className="works-info-modal__sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="works-info-title"
+            aria-describedby="works-info-description"
+            onPointerDown={handleWorksInfoPointerDown}
+            onPointerMove={handleWorksInfoPointerMove}
+            onPointerUp={handleWorksInfoPointerUp}
+            onPointerCancel={handleWorksInfoPointerCancel}
+          >
+            <span className="works-info-modal__handle" aria-hidden="true" />
+
+            <div className="works-info-visual" aria-labelledby="works-info-title">
+              <div className="works-info-visual__gallery" aria-hidden="true">
+                <article className="works-info-preview-card works-info-preview-card--aurora">
+                  <div className="works-info-preview-card__visual">
+                    <div className="works-info-preview-card__copy">
+                      <span className="works-info-preview-card__title">
+                        AURORA BOARD
+                      </span>
+                      <span className="works-info-preview-card__subtitle">
+                        Soft concept space.
+                      </span>
+                    </div>
+                    <span className="works-info-preview-card__abstract">
+                      <span className="works-info-preview-card__abstract-mark" />
+                    </span>
+                  </div>
+                  <div className="works-info-preview-card__cta">
+                    <span>Watch more</span>
+                  </div>
+                </article>
+
+                <article className="works-info-preview-card works-info-preview-card--coral">
+                  <div className="works-info-preview-card__visual">
+                    <div className="works-info-preview-card__copy">
+                      <span className="works-info-preview-card__title">
+                        CORAL STUDIO
+                      </span>
+                      <span className="works-info-preview-card__subtitle">
+                        Visual direction.
+                      </span>
+                    </div>
+                    <span className="works-info-preview-card__abstract">
+                      <span className="works-info-preview-card__abstract-mark" />
+                    </span>
+                  </div>
+                  <div className="works-info-preview-card__cta">
+                    <span>Watch more</span>
+                  </div>
+                </article>
+
+                <article className="works-info-preview-card works-info-preview-card--cactus">
+                  <div className="works-info-preview-card__visual">
+                    <div className="works-info-preview-card__copy">
+                      <span className="works-info-preview-card__title">
+                        CACTUS ASSISTANT
+                      </span>
+                      <span className="works-info-preview-card__subtitle">
+                        AI assistant inside Telegram.
+                      </span>
+                      <span className="works-info-preview-card__chips">
+                        <span className="works-info-preview-card__chip">
+                          <span className="works-info-preview-card__chip-icon">
+                            AI
+                          </span>
+                          Smart
+                        </span>
+                        <span className="works-info-preview-card__chip">
+                          <span className="works-info-preview-card__chip-icon">
+                            24
+                          </span>
+                          Online
+                        </span>
+                      </span>
+                    </div>
+                    <Image
+                      className="works-info-preview-card__avatar"
+                      src="/cactus-assistant-avatar.jpg"
+                      alt=""
+                      width={220}
+                      height={220}
+                    />
+                  </div>
+                  <div className="works-info-preview-card__cta">
+                    <span className="works-info-preview-card__tea-mark" />
+                    <span>Watch more</span>
+                    <span className="works-info-preview-card__tea-mark" />
+                  </div>
+                </article>
+              </div>
+              <h2 className="works-info-visual__title" id="works-info-title">
+                My Works
+              </h2>
+            </div>
+
+            <div className="works-info-modal__cards" id="works-info-description">
+              <article className="works-info-card works-info-card--projects">
+                <span className="works-info-card__icon" aria-hidden="true">
+                  <span className="works-info-card__icon-mark" />
+                </span>
+                <div className="works-info-card__copy">
+                  <h3 className="works-info-card__title">My projects</h3>
+                  <p className="works-info-card__text">
+                    В разделе «My projects» представлены различные прототипы
+                    проектов которые я делал. Благодаря этим прототипам можно
+                    посмотреть какие визуальные и стилистические элементы я умею
+                    делать при разработке. А также эти прототипы можно открыть и
+                    протестировать на своём телефоне, что очень удобно.
+                  </p>
+                </div>
+              </article>
+
+              <article className="works-info-card works-info-card--other">
+                <span className="works-info-card__icon" aria-hidden="true">
+                  <span className="works-info-card__icon-mark" />
+                </span>
+                <div className="works-info-card__copy">
+                  <h3 className="works-info-card__title">Other projects</h3>
+                  <p className="works-info-card__text">
+                    На странице «Other projects» представлены проекты созданные
+                    мной или в разработке которых я принимал участие. О всех
+                    проектах можно прочитать описание и узнать что именно
+                    разрабатывалось мной. Все проекты можно открыть из приложения
+                    и протестировать на своём устройстве.
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <button
+              className="works-info-modal__confirm"
+              type="button"
+              aria-label="OK"
+              onClick={closeWorksInfo}
+            >
+              <span className="works-info-modal__confirm-label" aria-hidden="true" />
+            </button>
+          </section>
+        </div>
+      ) : null}
 
       {isProjectDetailsMounted ? (
         <div
