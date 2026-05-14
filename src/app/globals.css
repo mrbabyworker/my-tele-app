@@ -1319,9 +1319,9 @@ body:has(.profile-screen) .bottom-menu {
   --works-info-drag-offset: 0px;
   --works-info-radius: min(54px, 7.67vw);
   position: fixed;
-  top: min(292px, 41.48vw);
+  top: min(326px, 46.31vw);
   right: 0;
-  bottom: min(45px, 6.39vw);
+  bottom: min(11px, 1.56vw);
   left: 0;
   z-index: 1;
   display: flex;
