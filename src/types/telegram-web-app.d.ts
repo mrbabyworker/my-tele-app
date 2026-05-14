@@ -65,6 +65,8 @@ type TelegramWebApp = {
   close: () => void;
   setHeaderColor: (color: string) => void;
   setBackgroundColor: (color: string) => void;
+  disableVerticalSwipes?: () => void;
+  enableVerticalSwipes?: () => void;
   enableClosingConfirmation: () => void;
   disableClosingConfirmation: () => void;
   HapticFeedback?: {

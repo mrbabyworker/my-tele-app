@@ -1330,12 +1330,10 @@ body:has(.profile-screen) .bottom-menu {
   margin: 0 auto;
   overflow: hidden;
   padding: min(49px, 6.96vw) min(28px, 3.98vw) min(55px, 7.81vw);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.075);
   border-radius: var(--works-info-radius);
   background: #212020;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.035),
-    0 -20px 48px rgba(0, 0, 0, 0.34);
+  box-shadow: 0 -20px 48px rgba(0, 0, 0, 0.34);
   color: #ffffff;
   opacity: 0.98;
   pointer-events: auto;
@@ -1872,66 +1870,21 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .works-info-card--projects .works-info-card__icon-mark {
-  position: relative;
-  width: min(36px, 5.11vw);
-  height: min(31px, 4.4vw);
-  border-radius: min(7px, 0.99vw);
+  width: min(41px, 5.82vw);
+  height: min(37px, 5.26vw);
   color: var(--works-info-card-icon);
-}
-
-.works-info-card--projects .works-info-card__icon-mark::before,
-.works-info-card--projects .works-info-card__icon-mark::after {
-  position: absolute;
-  content: "";
-}
-
-.works-info-card--projects .works-info-card__icon-mark::before {
-  top: min(7px, 0.99vw);
-  right: 0;
-  left: 0;
-  height: min(4px, 0.57vw);
-  background: #292828;
-}
-
-.works-info-card--projects .works-info-card__icon-mark::after {
-  top: max(-5px, -0.71vw);
-  left: min(8px, 1.14vw);
-  width: min(20px, 2.84vw);
-  height: min(9px, 1.28vw);
-  border-right: min(4px, 0.57vw) solid currentColor;
-  border-left: min(4px, 0.57vw) solid currentColor;
+  mask: url("/works-info-assets/backpack-icon.png") center / contain no-repeat;
+  -webkit-mask: url("/works-info-assets/backpack-icon.png") center / contain
+    no-repeat;
 }
 
 .works-info-card--other .works-info-card__icon-mark {
-  position: relative;
-  width: min(38px, 5.4vw);
-  height: min(38px, 5.4vw);
-  border: min(5px, 0.71vw) solid currentColor;
-  border-radius: 50%;
+  width: min(40px, 5.68vw);
+  height: min(36px, 5.11vw);
   color: var(--works-info-card-icon);
-  background: transparent;
-}
-
-.works-info-card--other .works-info-card__icon-mark::before,
-.works-info-card--other .works-info-card__icon-mark::after {
-  position: absolute;
-  border-radius: 50%;
-  background: currentColor;
-  content: "";
-}
-
-.works-info-card--other .works-info-card__icon-mark::before {
-  top: min(6px, 0.85vw);
-  left: min(5px, 0.71vw);
-  width: min(11px, 1.56vw);
-  height: min(9px, 1.28vw);
-}
-
-.works-info-card--other .works-info-card__icon-mark::after {
-  right: min(5px, 0.71vw);
-  bottom: min(5px, 0.71vw);
-  width: min(11px, 1.56vw);
-  height: min(11px, 1.56vw);
+  mask: url("/works-info-assets/folder-code-icon.png") center / contain no-repeat;
+  -webkit-mask: url("/works-info-assets/folder-code-icon.png") center / contain
+    no-repeat;
 }
 
 .works-info-card__copy {
@@ -1966,9 +1919,7 @@ body:has(.profile-screen) .bottom-menu {
   border: 0;
   border-radius: min(43px, 6.11vw);
   background: #2aaab8;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 13px 26px rgba(42, 170, 184, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
   cursor: pointer;
   outline: none;
   touch-action: manipulation;
@@ -1983,10 +1934,9 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .works-info-modal__confirm:focus-visible {
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 0 0 3px rgba(255, 255, 255, 0.2),
-    0 13px 26px rgba(42, 170, 184, 0.12);
+  outline: 3px solid rgba(255, 255, 255, 0.2);
+  outline-offset: 3px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
 .works-info-modal__confirm-label {

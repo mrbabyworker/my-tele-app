@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
   type PointerEvent,
+  type TouchEvent,
   type UIEvent,
 } from "react";
 
@@ -164,6 +165,7 @@ export default function WorksPage() {
 
     worksInfoDragStartY.current = event.clientY;
     worksInfoDragOffset.current = 0;
+    event.preventDefault();
     event.currentTarget.setPointerCapture(event.pointerId);
   }
 
@@ -172,6 +174,7 @@ export default function WorksPage() {
       return;
     }
 
+    event.preventDefault();
     const offset = Math.max(0, event.clientY - worksInfoDragStartY.current);
     worksInfoDragOffset.current = offset;
     event.currentTarget.style.setProperty(
@@ -207,6 +210,12 @@ export default function WorksPage() {
     event.currentTarget.style.removeProperty("--works-info-drag-offset");
   }
 
+  function handleWorksInfoTouchMove(event: TouchEvent<HTMLElement>) {
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+  }
+
   function handleProjectDetailsScroll(event: UIEvent<HTMLDivElement>) {
     setIsProjectDetailsScrolled(event.currentTarget.scrollTop > 4);
   }
@@ -240,6 +249,17 @@ export default function WorksPage() {
       return;
     }
 
+    const webApp = window.Telegram?.WebApp;
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalBodyOverscrollBehavior = document.body.style.overscrollBehavior;
+    const originalHtmlOverscrollBehavior =
+      document.documentElement.style.overscrollBehavior;
+
+    webApp?.disableVerticalSwipes?.();
+    document.body.style.overflow = "hidden";
+    document.body.style.overscrollBehavior = "none";
+    document.documentElement.style.overscrollBehavior = "none";
+
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setIsWorksInfoOpen(false);
@@ -248,7 +268,14 @@ export default function WorksPage() {
 
     window.addEventListener("keydown", handleKeyDown);
 
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalBodyOverflow;
+      document.body.style.overscrollBehavior = originalBodyOverscrollBehavior;
+      document.documentElement.style.overscrollBehavior =
+        originalHtmlOverscrollBehavior;
+      webApp?.enableVerticalSwipes?.();
+    };
   }, [isWorksInfoOpen]);
 
   useEffect(() => {
@@ -378,6 +405,7 @@ export default function WorksPage() {
             onPointerMove={handleWorksInfoPointerMove}
             onPointerUp={handleWorksInfoPointerUp}
             onPointerCancel={handleWorksInfoPointerCancel}
+            onTouchMove={handleWorksInfoTouchMove}
           >
             <span className="works-info-modal__handle" aria-hidden="true" />
 
@@ -473,11 +501,11 @@ export default function WorksPage() {
                 <div className="works-info-card__copy">
                   <h3 className="works-info-card__title">My projects</h3>
                   <p className="works-info-card__text">
-                    В разделе «My projects» представлены различные прототипы
-                    проектов которые я делал. Благодаря этим прототипам можно
-                    посмотреть какие визуальные и стилистические элементы я умею
-                    делать при разработке. А также эти прототипы можно открыть и
-                    протестировать на своём телефоне, что очень удобно.
+                    In the «My projects» section, various project prototypes that
+                    I developed are presented. Thanks to these prototypes, you can
+                    see the visual and stylistic elements I am capable of creating
+                    during development. Also, these prototypes can be opened and
+                    tested on your own phone, which is very convenient.
                   </p>
                 </div>
               </article>
@@ -489,11 +517,10 @@ export default function WorksPage() {
                 <div className="works-info-card__copy">
                   <h3 className="works-info-card__title">Other projects</h3>
                   <p className="works-info-card__text">
-                    На странице «Other projects» представлены проекты созданные
-                    мной или в разработке которых я принимал участие. О всех
-                    проектах можно прочитать описание и узнать что именно
-                    разрабатывалось мной. Все проекты можно открыть из приложения
-                    и протестировать на своём устройстве.
+                    On the «Other projects» page are projects created by me or in
+                    the development of which I participated. You can read about all
+                    projects and find out exactly what I developed. All projects
+                    can be opened from the application and tested on your device.
                   </p>
                 </div>
               </article>
