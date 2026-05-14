@@ -1321,7 +1321,7 @@ body:has(.profile-screen) .bottom-menu {
   position: fixed;
   top: min(292px, 41.48vw);
   right: 0;
-  bottom: min(11px, 1.56vw);
+  bottom: min(45px, 6.39vw);
   left: 0;
   z-index: 1;
   display: flex;
@@ -1844,12 +1844,12 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .works-info-card--projects {
-  height: min(298px, 42.33vw);
+  height: min(291px, 41.34vw);
   padding: min(24px, 3.41vw) min(28px, 3.98vw) min(30px, 4.26vw);
 }
 
 .works-info-card--other {
-  height: min(290px, 41.19vw);
+  height: min(263px, 37.36vw);
   padding: min(24px, 3.41vw) min(28px, 3.98vw) min(28px, 3.98vw);
 }
 
