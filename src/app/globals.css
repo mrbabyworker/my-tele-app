@@ -611,25 +611,23 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .works-hero-badge {
+  --works-badge-height: min(56px, 7.95vw);
   position: relative;
   isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: min(11px, 1.56vw);
-  height: min(56px, 7.95vw);
+  height: var(--works-badge-height);
   max-width: min(246px, 34.94vw);
   padding: 0 min(21px, 2.98vw);
   overflow: hidden;
-  border: 1px solid #333333;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 999px;
-  background: #272727;
-  background-clip: padding-box;
+  background: rgba(33, 34, 34, 0.74);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.012),
-    0 4px 8px rgba(0, 0, 0, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.028),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.018),
+    0 13px 28px rgba(0, 0, 0, 0.18);
   color: #ffffff;
   cursor: pointer;
   outline: none;
@@ -640,30 +638,12 @@ body:has(.profile-screen) .bottom-menu {
   transition:
     transform 130ms ease,
     background-color 130ms ease,
-    border-color 130ms ease,
     opacity 130ms ease;
 }
 
 .works-hero-badge::before,
 .works-hero-badge::after {
-  position: absolute;
-  border-radius: inherit;
-  content: "";
-  pointer-events: none;
-}
-
-.works-hero-badge::before {
-  inset: -1px;
-  z-index: -1;
-  border: 1px solid rgba(0, 0, 0, 0.14);
-}
-
-.works-hero-badge::after {
-  inset: 0;
-  z-index: 0;
-  box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.052),
-    inset 0 1px 0 rgba(0, 0, 0, 0.06);
+  content: none;
 }
 
 .works-hero-badge--info {
@@ -675,8 +655,6 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .works-hero-badge:active {
-  border-color: #383838;
-  background: #2a2a2a;
   opacity: 0.94;
   transform: scale(0.97);
 }
