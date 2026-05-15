@@ -4,6 +4,7 @@ import { BottomMenu } from "@/components/bottom-menu";
 import { LottieAnimation } from "@/components/lottie-animation";
 import Image from "next/image";
 import {
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -151,7 +152,7 @@ function getEmploymentAccent(percent: number) {
 
 export default function WorksPage() {
   const [activeSegment, setActiveSegment] = useState<Segment>("mine");
-  const [employmentPercent] = useState(() =>
+  const [employmentPercent, setEmploymentPercent] = useState(() =>
     clampEmploymentPercent(DEFAULT_EMPLOYMENT_PERCENT),
   );
   const [isWorksInfoMounted, setIsWorksInfoMounted] = useState(false);
@@ -176,6 +177,28 @@ export default function WorksPage() {
     "--employment-accent": getEmploymentAccent(employmentPercent),
     "--employment-progress": `${employmentPercent * 3.6}deg`,
   };
+
+  const refreshEmploymentPercent = useCallback(async () => {
+    try {
+      const response = await fetch("/api/employment", {
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        return;
+      }
+
+      const data = (await response.json()) as {
+        percent?: unknown;
+      };
+
+      if (typeof data.percent === "number") {
+        setEmploymentPercent(clampEmploymentPercent(data.percent));
+      }
+    } catch {
+      // Keep the last known value if the network is temporarily unavailable.
+    }
+  }, []);
 
   function selectSegment(segment: Segment) {
     if (segment !== activeSegment) {
@@ -210,6 +233,7 @@ export default function WorksPage() {
 
   function openEmploymentInfo() {
     window.Telegram?.WebApp.HapticFeedback?.impactOccurred?.("light");
+    void refreshEmploymentPercent();
     setIsEmploymentInfoMounted(true);
     window.requestAnimationFrame(() => setIsEmploymentInfoOpen(true));
   }
@@ -348,6 +372,36 @@ export default function WorksPage() {
   function handleProjectDetailsScroll(event: UIEvent<HTMLDivElement>) {
     setIsProjectDetailsScrolled(event.currentTarget.scrollTop > 4);
   }
+
+  useEffect(() => {
+    const initialRefreshTimer = window.setTimeout(() => {
+      void refreshEmploymentPercent();
+    }, 0);
+
+    const refreshTimer = window.setInterval(() => {
+      void refreshEmploymentPercent();
+    }, 10000);
+
+    function handleFocus() {
+      void refreshEmploymentPercent();
+    }
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === "visible") {
+        void refreshEmploymentPercent();
+      }
+    }
+
+    window.addEventListener("focus", handleFocus);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.clearTimeout(initialRefreshTimer);
+      window.clearInterval(refreshTimer);
+      window.removeEventListener("focus", handleFocus);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [refreshEmploymentPercent]);
 
   useEffect(() => {
     if (!isWorksInfoMounted || isWorksInfoOpen) {
