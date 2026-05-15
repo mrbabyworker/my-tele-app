@@ -121,7 +121,10 @@ type SupabaseSettingRow = {
 
 async function getSupabaseEmploymentPercent(config: SupabaseConfig) {
   const response = await fetch(
-    `${config.url}/rest/v1/${SUPABASE_SETTINGS_TABLE}?key=eq.${encodeURIComponent(EMPLOYMENT_KEY)}&select=key,value&limit=1`,
+    getSupabaseRestUrl(
+      config,
+      `/${SUPABASE_SETTINGS_TABLE}?key=eq.${encodeURIComponent(EMPLOYMENT_KEY)}&select=key,value&limit=1`,
+    ),
     {
       headers: getSupabaseHeaders(config),
       cache: "no-store",
@@ -149,7 +152,7 @@ async function setSupabaseEmploymentPercent(
   percent: number,
 ) {
   const response = await fetch(
-    `${config.url}/rest/v1/${SUPABASE_SETTINGS_TABLE}?on_conflict=key`,
+    getSupabaseRestUrl(config, `/${SUPABASE_SETTINGS_TABLE}?on_conflict=key`),
     {
       method: "POST",
       headers: {
@@ -180,6 +183,10 @@ function getSupabaseHeaders(config: SupabaseConfig) {
   };
 }
 
+function getSupabaseRestUrl(config: SupabaseConfig, path: string) {
+  return `${config.url}/rest/v1${path}`;
+}
+
 function getSupabaseConfig() {
   const url = process.env.SUPABASE_URL ?? "";
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
@@ -190,6 +197,10 @@ function getSupabaseConfig() {
 
   return {
     serviceRoleKey,
-    url: url.replace(/\/$/, ""),
+    url: normalizeSupabaseProjectUrl(url),
   };
+}
+
+function normalizeSupabaseProjectUrl(url: string) {
+  return url.replace(/\/+$/, "").replace(/\/rest\/v1$/i, "");
 }
