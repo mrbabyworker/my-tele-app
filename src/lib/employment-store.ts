@@ -129,7 +129,9 @@ async function getSupabaseEmploymentPercent(config: SupabaseConfig) {
   );
 
   if (!response.ok) {
-    throw new Error(`Supabase request failed with status ${response.status}`);
+    throw new Error(
+      `Supabase GET request failed with status ${response.status}: ${await response.text()}`,
+    );
   }
 
   const rows = (await response.json()) as SupabaseSettingRow[];
@@ -147,12 +149,12 @@ async function setSupabaseEmploymentPercent(
   percent: number,
 ) {
   const response = await fetch(
-    `${config.url}/rest/v1/${SUPABASE_SETTINGS_TABLE}`,
+    `${config.url}/rest/v1/${SUPABASE_SETTINGS_TABLE}?on_conflict=key`,
     {
       method: "POST",
       headers: {
         ...getSupabaseHeaders(config),
-        Prefer: "resolution=merge-duplicates",
+        Prefer: "resolution=merge-duplicates,return=minimal",
       },
       body: JSON.stringify({
         key: EMPLOYMENT_KEY,
@@ -164,7 +166,9 @@ async function setSupabaseEmploymentPercent(
   );
 
   if (!response.ok) {
-    throw new Error(`Supabase request failed with status ${response.status}`);
+    throw new Error(
+      `Supabase SET request failed with status ${response.status}: ${await response.text()}`,
+    );
   }
 }
 
