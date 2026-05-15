@@ -1924,6 +1924,365 @@ body:has(.profile-screen) .bottom-menu {
   background: url("/works-info-assets/ok-label.png") center / contain no-repeat;
 }
 
+.employment-info-modal__sheet {
+  top: auto;
+  padding-bottom: min(55px, 7.81vw);
+}
+
+.employment-info-visual {
+  position: relative;
+  flex: 0 0 min(352px, 50vw);
+  width: 100%;
+  height: min(352px, 50vw);
+  overflow: hidden;
+  border-radius: min(42px, 5.97vw);
+  background:
+    radial-gradient(
+      84% 78% at 50% 8%,
+      rgba(87, 233, 224, 0.2) 0%,
+      rgba(87, 233, 224, 0.06) 42%,
+      rgba(87, 233, 224, 0) 68%
+    ),
+    radial-gradient(
+      48% 52% at 83% 34%,
+      rgba(183, 103, 255, 0.17) 0%,
+      rgba(183, 103, 255, 0) 66%
+    ),
+    radial-gradient(
+      54% 58% at 18% 78%,
+      rgba(77, 221, 160, 0.14) 0%,
+      rgba(77, 221, 160, 0) 62%
+    ),
+    linear-gradient(145deg, #081823 0%, #0b2035 48%, #060914 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.085),
+    inset 0 -32px 78px rgba(0, 0, 0, 0.28),
+    0 18px 34px rgba(0, 0, 0, 0.12);
+}
+
+.employment-info-visual::before,
+.employment-info-visual::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.employment-info-visual::before {
+  opacity: 0.4;
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(255, 255, 255, 0.5) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle at 36% 12%,
+      rgba(255, 255, 255, 0.34) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle at 74% 28%,
+      rgba(255, 255, 255, 0.34) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle at 84% 68%,
+      rgba(255, 255, 255, 0.26) 0 1px,
+      transparent 1.8px
+    );
+  background-size:
+    min(126px, 17.9vw) min(82px, 11.65vw),
+    min(154px, 21.88vw) min(96px, 13.64vw),
+    min(142px, 20.17vw) min(104px, 14.77vw),
+    min(168px, 23.86vw) min(112px, 15.91vw);
+}
+
+.employment-info-visual::after {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.03) 46%,
+      rgba(0, 0, 0, 0.3) 100%
+    ),
+    radial-gradient(
+      76% 62% at 50% 78%,
+      rgba(50, 196, 196, 0.18) 0%,
+      rgba(50, 196, 196, 0) 68%
+    );
+}
+
+.employment-info-visual__stage {
+  position: absolute;
+  inset: min(28px, 3.98vw) min(25px, 3.55vw) min(82px, 11.65vw);
+  z-index: 2;
+}
+
+.employment-info-visual__glow {
+  position: absolute;
+  top: min(18px, 2.56vw);
+  left: 50%;
+  width: min(450px, 63.92vw);
+  height: min(242px, 34.38vw);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(67, 226, 225, 0.28) 0%,
+      rgba(67, 226, 225, 0.11) 36%,
+      rgba(67, 226, 225, 0) 70%
+    );
+  filter: blur(min(14px, 1.99vw));
+  transform: translateX(-50%);
+}
+
+.employment-info-visual__panel {
+  position: absolute;
+  left: 50%;
+  display: flex;
+  overflow: hidden;
+  border: 1px solid rgba(203, 245, 249, 0.15);
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0) 46%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(58, 177, 190, 0.42) 0%,
+      rgba(35, 111, 151, 0.34) 52%,
+      rgba(17, 44, 76, 0.42) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    0 20px 38px rgba(0, 0, 0, 0.21);
+  -webkit-backdrop-filter: blur(12px) saturate(115%);
+  backdrop-filter: blur(12px) saturate(115%);
+}
+
+.employment-info-visual__panel--back {
+  top: min(31px, 4.4vw);
+  z-index: 1;
+  width: min(430px, 61.08vw);
+  height: min(118px, 16.76vw);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 min(33px, 4.69vw);
+  border-radius: min(31px, 4.4vw);
+  opacity: 0.72;
+  transform: translateX(-50%) rotate(3.2deg);
+}
+
+.employment-info-visual__panel--front {
+  top: min(65px, 9.23vw);
+  z-index: 3;
+  width: min(470px, 66.76vw);
+  height: min(177px, 25.14vw);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: min(36px, 5.11vw);
+  transform: translateX(-50%) rotate(-1.2deg);
+}
+
+.employment-info-visual__panel-title {
+  color: rgba(231, 252, 253, 0.74);
+  font-size: min(18px, 2.56vw);
+  font-weight: 760;
+  line-height: min(22px, 3.13vw);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.employment-info-visual__chart {
+  display: flex;
+  height: min(54px, 7.67vw);
+  align-items: flex-end;
+  gap: min(6px, 0.85vw);
+}
+
+.employment-info-visual__chart span {
+  width: min(10px, 1.42vw);
+  border-radius: 999px;
+  background: rgba(227, 250, 252, 0.58);
+  box-shadow: 0 0 min(14px, 1.99vw) rgba(71, 226, 225, 0.18);
+}
+
+.employment-info-visual__chart span:nth-child(1) {
+  height: 44%;
+  opacity: 0.42;
+}
+
+.employment-info-visual__chart span:nth-child(2) {
+  height: 64%;
+  opacity: 0.56;
+}
+
+.employment-info-visual__chart span:nth-child(3) {
+  height: 34%;
+  opacity: 0.34;
+}
+
+.employment-info-visual__chart span:nth-child(4) {
+  height: 78%;
+  opacity: 0.66;
+}
+
+.employment-info-visual__chart span:nth-child(5) {
+  height: 52%;
+  opacity: 0.5;
+}
+
+.employment-info-visual__status {
+  display: inline-flex;
+  height: min(30px, 4.26vw);
+  align-items: center;
+  gap: min(8px, 1.14vw);
+  padding: 0 min(13px, 1.85vw);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 999px;
+  background: rgba(5, 24, 37, 0.28);
+  color: rgba(237, 253, 253, 0.86);
+  font-size: min(13px, 1.85vw);
+  font-weight: 720;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.employment-info-visual__status-dot {
+  width: min(8px, 1.14vw);
+  height: min(8px, 1.14vw);
+  border-radius: 50%;
+  background: var(--employment-accent);
+  box-shadow: 0 0 min(14px, 1.99vw) color-mix(in srgb, var(--employment-accent) 64%, transparent);
+}
+
+.employment-info-visual__ring {
+  display: grid;
+  width: min(92px, 13.07vw);
+  height: min(92px, 13.07vw);
+  place-items: center;
+  margin-top: min(12px, 1.7vw);
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      var(--employment-accent) 0deg,
+      var(--employment-accent) var(--employment-progress),
+      rgba(255, 255, 255, 0.18) var(--employment-progress)
+    ),
+    rgba(7, 28, 43, 0.32);
+  box-shadow:
+    inset 0 0 0 min(10px, 1.42vw) rgba(7, 34, 49, 0.86),
+    0 14px 26px rgba(0, 0, 0, 0.16),
+    0 0 min(28px, 3.98vw) rgba(83, 227, 225, 0.16);
+}
+
+.employment-info-visual__ring span {
+  color: rgba(255, 255, 255, 0.96);
+  font-size: min(24px, 3.41vw);
+  font-weight: 830;
+  line-height: 1;
+}
+
+.employment-info-visual__scale {
+  display: flex;
+  width: min(230px, 32.67vw);
+  height: min(8px, 1.14vw);
+  gap: min(5px, 0.71vw);
+  margin-top: min(14px, 1.99vw);
+}
+
+.employment-info-visual__scale-step {
+  flex: 1;
+  border-radius: 999px;
+  background: rgba(238, 253, 253, 0.22);
+}
+
+.employment-info-visual__scale-step--active {
+  background: var(--employment-accent);
+  box-shadow: 0 0 min(13px, 1.85vw) color-mix(in srgb, var(--employment-accent) 42%, transparent);
+}
+
+.employment-info-visual__chip {
+  position: absolute;
+  z-index: 4;
+  display: inline-flex;
+  height: min(34px, 4.83vw);
+  align-items: center;
+  padding: 0 min(15px, 2.13vw);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 999px;
+  background: rgba(8, 26, 40, 0.52);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 22px rgba(0, 0, 0, 0.16);
+  color: rgba(231, 250, 250, 0.76);
+  font-size: min(13px, 1.85vw);
+  font-weight: 720;
+  line-height: 1;
+  white-space: nowrap;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.employment-info-visual__chip--left {
+  bottom: min(23px, 3.27vw);
+  left: min(62px, 8.81vw);
+  transform: rotate(-2deg);
+}
+
+.employment-info-visual__chip--right {
+  right: min(54px, 7.67vw);
+  bottom: min(43px, 6.11vw);
+  transform: rotate(2deg);
+}
+
+.employment-info-visual__title {
+  position: absolute;
+  right: min(40px, 5.68vw);
+  bottom: min(25px, 3.55vw);
+  left: min(40px, 5.68vw);
+  z-index: 3;
+  margin: 0;
+  overflow: hidden;
+  color: rgba(219, 242, 243, 0.6);
+  font-size: min(49px, 6.96vw);
+  font-weight: 790;
+  line-height: min(58px, 8.24vw);
+  letter-spacing: 0;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.employment-info-modal__percent {
+  margin: min(38px, 5.4vw) 0 0;
+  color: #ffffff;
+  font-size: min(48px, 6.82vw);
+  font-weight: 820;
+  line-height: min(58px, 8.24vw);
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.employment-info-modal__description {
+  max-width: min(612px, 86.93vw);
+  margin: min(22px, 3.13vw) auto 0;
+  color: #b9b9bd;
+  font-size: min(26px, 3.69vw);
+  font-weight: 520;
+  line-height: min(38px, 5.4vw);
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.employment-info-modal__confirm {
+  margin-top: min(43px, 6.11vw);
+}
+
 .project-details-modal {
   position: fixed;
   inset: 0;

@@ -7,6 +7,7 @@ import {
   useEffect,
   useRef,
   useState,
+  type CSSProperties,
   type PointerEvent,
   type TouchEvent,
   type UIEvent,
@@ -105,10 +106,58 @@ const CACTUS_ASSISTANT_DETAILS = [
   "The interface stays lightweight and premium, with a friendly visual identity, smooth motion, and controls that feel native to a Telegram mini app. The goal is simple: keep an intelligent assistant close enough to become part of your everyday rhythm while preserving the speed and ease of a conversation. Everything is shaped to stay quiet, readable, and useful on a mobile screen.",
 ];
 
+const DEFAULT_EMPLOYMENT_PERCENT = 0;
+const EMPLOYMENT_SCALE_STEPS = [20, 40, 60, 80, 100] as const;
+
+function clampEmploymentPercent(percent: number) {
+  return Math.min(100, Math.max(0, Math.round(percent)));
+}
+
+function getEmploymentStatus(percent: number) {
+  if (percent >= 90) {
+    return "Fully booked";
+  }
+
+  if (percent >= 65) {
+    return "High load";
+  }
+
+  if (percent >= 35) {
+    return "Moderate load";
+  }
+
+  if (percent > 0) {
+    return "Light load";
+  }
+
+  return "Open for new work";
+}
+
+function getEmploymentAccent(percent: number) {
+  if (percent >= 90) {
+    return "#ff6f6f";
+  }
+
+  if (percent >= 65) {
+    return "#ffb84d";
+  }
+
+  if (percent >= 35) {
+    return "#f4d35e";
+  }
+
+  return "#52e07e";
+}
+
 export default function WorksPage() {
   const [activeSegment, setActiveSegment] = useState<Segment>("mine");
+  const [employmentPercent] = useState(() =>
+    clampEmploymentPercent(DEFAULT_EMPLOYMENT_PERCENT),
+  );
   const [isWorksInfoMounted, setIsWorksInfoMounted] = useState(false);
   const [isWorksInfoOpen, setIsWorksInfoOpen] = useState(false);
+  const [isEmploymentInfoMounted, setIsEmploymentInfoMounted] = useState(false);
+  const [isEmploymentInfoOpen, setIsEmploymentInfoOpen] = useState(false);
   const [isProjectDetailsMounted, setIsProjectDetailsMounted] =
     useState(false);
   const [isProjectDetailsOpen, setIsProjectDetailsOpen] = useState(false);
@@ -116,7 +165,17 @@ export default function WorksPage() {
     useState(false);
   const worksInfoDragStartY = useRef<number | null>(null);
   const worksInfoDragOffset = useRef(0);
+  const employmentInfoDragStartY = useRef<number | null>(null);
+  const employmentInfoDragOffset = useRef(0);
   const projects = PROJECT_GROUPS[activeSegment];
+  const employmentStatus = getEmploymentStatus(employmentPercent);
+  const employmentVisualStyle: CSSProperties & {
+    "--employment-accent": string;
+    "--employment-progress": string;
+  } = {
+    "--employment-accent": getEmploymentAccent(employmentPercent),
+    "--employment-progress": `${employmentPercent * 3.6}deg`,
+  };
 
   function selectSegment(segment: Segment) {
     if (segment !== activeSegment) {
@@ -149,8 +208,15 @@ export default function WorksPage() {
     setIsWorksInfoOpen(false);
   }
 
-  function notifyHeroBadgeTap() {
+  function openEmploymentInfo() {
     window.Telegram?.WebApp.HapticFeedback?.impactOccurred?.("light");
+    setIsEmploymentInfoMounted(true);
+    window.requestAnimationFrame(() => setIsEmploymentInfoOpen(true));
+  }
+
+  function closeEmploymentInfo() {
+    window.Telegram?.WebApp.HapticFeedback?.impactOccurred?.("light");
+    setIsEmploymentInfoOpen(false);
   }
 
   function handleWorksInfoPointerDown(event: PointerEvent<HTMLElement>) {
@@ -216,6 +282,69 @@ export default function WorksPage() {
     }
   }
 
+  function handleEmploymentInfoPointerDown(event: PointerEvent<HTMLElement>) {
+    if (event.pointerType === "mouse" && event.button !== 0) {
+      return;
+    }
+
+    const target = event.target as HTMLElement;
+    if (target.closest("button")) {
+      return;
+    }
+
+    employmentInfoDragStartY.current = event.clientY;
+    employmentInfoDragOffset.current = 0;
+    event.preventDefault();
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function handleEmploymentInfoPointerMove(event: PointerEvent<HTMLElement>) {
+    if (employmentInfoDragStartY.current === null) {
+      return;
+    }
+
+    event.preventDefault();
+    const offset = Math.max(0, event.clientY - employmentInfoDragStartY.current);
+    employmentInfoDragOffset.current = offset;
+    event.currentTarget.style.setProperty(
+      "--works-info-drag-offset",
+      `${offset}px`,
+    );
+  }
+
+  function handleEmploymentInfoPointerUp(event: PointerEvent<HTMLElement>) {
+    if (employmentInfoDragStartY.current === null) {
+      return;
+    }
+
+    const sheet = event.currentTarget;
+    employmentInfoDragStartY.current = null;
+
+    if (employmentInfoDragOffset.current > 82) {
+      sheet.style.removeProperty("--works-info-drag-offset");
+      closeEmploymentInfo();
+      return;
+    }
+
+    employmentInfoDragOffset.current = 0;
+    sheet.style.setProperty("--works-info-drag-offset", "0px");
+    window.setTimeout(() => {
+      sheet.style.removeProperty("--works-info-drag-offset");
+    }, 260);
+  }
+
+  function handleEmploymentInfoPointerCancel(event: PointerEvent<HTMLElement>) {
+    employmentInfoDragStartY.current = null;
+    employmentInfoDragOffset.current = 0;
+    event.currentTarget.style.removeProperty("--works-info-drag-offset");
+  }
+
+  function handleEmploymentInfoTouchMove(event: TouchEvent<HTMLElement>) {
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+  }
+
   function handleProjectDetailsScroll(event: UIEvent<HTMLDivElement>) {
     setIsProjectDetailsScrolled(event.currentTarget.scrollTop > 4);
   }
@@ -231,6 +360,18 @@ export default function WorksPage() {
 
     return () => window.clearTimeout(unmountTimer);
   }, [isWorksInfoMounted, isWorksInfoOpen]);
+
+  useEffect(() => {
+    if (!isEmploymentInfoMounted || isEmploymentInfoOpen) {
+      return;
+    }
+
+    const unmountTimer = window.setTimeout(() => {
+      setIsEmploymentInfoMounted(false);
+    }, 540);
+
+    return () => window.clearTimeout(unmountTimer);
+  }, [isEmploymentInfoMounted, isEmploymentInfoOpen]);
 
   useEffect(() => {
     if (!isProjectDetailsMounted || isProjectDetailsOpen) {
@@ -279,6 +420,40 @@ export default function WorksPage() {
   }, [isWorksInfoOpen]);
 
   useEffect(() => {
+    if (!isEmploymentInfoOpen) {
+      return;
+    }
+
+    const webApp = window.Telegram?.WebApp;
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalBodyOverscrollBehavior = document.body.style.overscrollBehavior;
+    const originalHtmlOverscrollBehavior =
+      document.documentElement.style.overscrollBehavior;
+
+    webApp?.disableVerticalSwipes?.();
+    document.body.style.overflow = "hidden";
+    document.body.style.overscrollBehavior = "none";
+    document.documentElement.style.overscrollBehavior = "none";
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsEmploymentInfoOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalBodyOverflow;
+      document.body.style.overscrollBehavior = originalBodyOverscrollBehavior;
+      document.documentElement.style.overscrollBehavior =
+        originalHtmlOverscrollBehavior;
+      webApp?.enableVerticalSwipes?.();
+    };
+  }, [isEmploymentInfoOpen]);
+
+  useEffect(() => {
     if (!isProjectDetailsOpen) {
       return;
     }
@@ -316,7 +491,7 @@ export default function WorksPage() {
                 <button
                   className="works-hero-badge works-hero-badge--employment"
                   type="button"
-                  onClick={notifyHeroBadgeTap}
+                  onClick={openEmploymentInfo}
                 >
                   <span
                     className="works-hero-badge__icon works-hero-badge__icon--employment"
@@ -531,6 +706,114 @@ export default function WorksPage() {
               type="button"
               aria-label="OK"
               onClick={closeWorksInfo}
+            >
+              <span className="works-info-modal__confirm-label" aria-hidden="true" />
+            </button>
+          </section>
+        </div>
+      ) : null}
+
+      {isEmploymentInfoMounted ? (
+        <div
+          className={`works-info-modal employment-info-modal${
+            isEmploymentInfoOpen ? " works-info-modal--open" : ""
+          }`}
+          aria-hidden={!isEmploymentInfoOpen}
+        >
+          <button
+            className="works-info-modal__backdrop"
+            type="button"
+            aria-label="Close employment information"
+            onClick={closeEmploymentInfo}
+          />
+
+          <section
+            className="works-info-modal__sheet employment-info-modal__sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="employment-info-title"
+            aria-describedby="employment-info-description"
+            onPointerDown={handleEmploymentInfoPointerDown}
+            onPointerMove={handleEmploymentInfoPointerMove}
+            onPointerUp={handleEmploymentInfoPointerUp}
+            onPointerCancel={handleEmploymentInfoPointerCancel}
+            onTouchMove={handleEmploymentInfoTouchMove}
+          >
+            <span className="works-info-modal__handle" aria-hidden="true" />
+
+            <div
+              className="employment-info-visual"
+              aria-labelledby="employment-info-title"
+            >
+              <div
+                className="employment-info-visual__stage"
+                aria-hidden="true"
+                style={employmentVisualStyle}
+              >
+                <span className="employment-info-visual__glow" />
+                <span className="employment-info-visual__panel employment-info-visual__panel--back">
+                  <span className="employment-info-visual__panel-title">
+                    Hourly update
+                  </span>
+                  <span className="employment-info-visual__chart">
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                  </span>
+                </span>
+                <span className="employment-info-visual__panel employment-info-visual__panel--front">
+                  <span className="employment-info-visual__status">
+                    <span className="employment-info-visual__status-dot" />
+                    {employmentStatus}
+                  </span>
+                  <span className="employment-info-visual__ring">
+                    <span>{employmentPercent}%</span>
+                  </span>
+                  <span className="employment-info-visual__scale">
+                    {EMPLOYMENT_SCALE_STEPS.map((step) => (
+                      <span
+                        className={`employment-info-visual__scale-step${
+                          employmentPercent >= step
+                            ? " employment-info-visual__scale-step--active"
+                            : ""
+                        }`}
+                        key={step}
+                      />
+                    ))}
+                  </span>
+                </span>
+                <span className="employment-info-visual__chip employment-info-visual__chip--left">
+                  Client friendly
+                </span>
+                <span className="employment-info-visual__chip employment-info-visual__chip--right">
+                  Updated hourly
+                </span>
+              </div>
+
+              <h2 className="employment-info-visual__title" id="employment-info-title">
+                Employment
+              </h2>
+            </div>
+
+            <h3 className="employment-info-modal__percent">
+              {employmentPercent}% employment
+            </h3>
+            <p
+              className="employment-info-modal__description"
+              id="employment-info-description"
+            >
+              The employment indicator is updated every hour. It is designed for
+              the convenience of clients planning to purchase any service from Mr
+              Cactus.
+            </p>
+
+            <button
+              className="works-info-modal__confirm employment-info-modal__confirm"
+              type="button"
+              aria-label="OK"
+              onClick={closeEmploymentInfo}
             >
               <span className="works-info-modal__confirm-label" aria-hidden="true" />
             </button>
