@@ -573,7 +573,16 @@ export default function WorksPage() {
               role="tablist"
               aria-label="Project type"
             >
-              <span className="works-segmented__pill" aria-hidden="true" />
+              <span className="works-segmented__pill" aria-hidden="true">
+                <span className="works-segmented__pill-labels">
+                  <span className="works-segmented__pill-label">
+                    My projects
+                  </span>
+                  <span className="works-segmented__pill-label">
+                    Other projects
+                  </span>
+                </span>
+              </span>
               <button
                 className="works-segmented__button"
                 type="button"
