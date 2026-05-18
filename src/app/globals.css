@@ -8,6 +8,36 @@
   );
   --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display",
     "SF Pro Text", "Segoe UI", sans-serif;
+  --main-bg-top: #8d8fa4;
+  --main-bg-upper: #85889d;
+  --main-bg-high-mid: #777a90;
+  --main-bg-mid: #66697e;
+  --main-bg-low-mid: #565970;
+  --main-bg-lower: #484b61;
+  --main-bg-deep: #383b52;
+  --main-bg-bottom: #2c2e42;
+  --main-bg-gradient: linear-gradient(
+    180deg,
+    var(--main-bg-top) 0%,
+    var(--main-bg-upper) 10%,
+    var(--main-bg-high-mid) 24%,
+    var(--main-bg-mid) 40%,
+    var(--main-bg-low-mid) 56%,
+    var(--main-bg-lower) 72%,
+    var(--main-bg-deep) 88%,
+    var(--main-bg-bottom) 100%
+  );
+  --main-top-fade-rgb: 141, 143, 164;
+  --main-bottom-fade-rgb: 44, 46, 66;
+  --main-social-button: rgba(72, 75, 101, 0.72);
+  --main-social-button-pressed: rgba(65, 68, 92, 0.78);
+  --main-social-highlight: rgba(155, 160, 205, 0.16);
+  --main-social-shadow: rgba(30, 32, 52, 0.24);
+  --main-surface: rgba(70, 74, 99, 0.76);
+  --main-surface-shadow: rgba(24, 26, 45, 0.24);
+  --main-surface-dark: rgba(43, 47, 68, 0.7);
+  --main-surface-dark-shadow: rgba(24, 26, 45, 0.18);
+  --main-accent-blue: #29baff;
 }
 
 * {
@@ -23,7 +53,7 @@ body {
 
 html {
   overflow: hidden;
-  background: #3d6d7b;
+  background: var(--main-bg-bottom);
   scrollbar-width: none;
 }
 
@@ -34,18 +64,7 @@ html::-webkit-scrollbar {
 body {
   overflow: hidden;
   scrollbar-width: none;
-  background:
-    linear-gradient(
-      180deg,
-      #afeafb 0%,
-      #a7e0f2 12%,
-      #8cc5d8 30%,
-      #6ea2b7 54%,
-      #5d91a6 74%,
-      #477687 90%,
-      #3d6d7b 100%
-    )
-    fixed;
+  background: var(--main-bg-gradient) fixed;
   color: #ffffff;
   font-family: var(--font-system);
   -webkit-font-smoothing: antialiased;
@@ -84,26 +103,16 @@ nextjs-portal {
   --bottom-fade-a2: 0.24;
   --bottom-fade-a3: 0.5;
   --bottom-fade-a4: 0.82;
-  --bottom-fade-rgb: 34, 80, 94;
+  --bottom-fade-rgb: var(--main-bottom-fade-rgb);
   --top-fade-height: min(114px, 16.2vw);
-  --top-fade-rgb: 175, 234, 251;
+  --top-fade-rgb: var(--main-top-fade-rgb);
   width: 100vw;
   height: 100dvh;
   min-height: 100dvh;
   overflow-y: auto;
   overscroll-behavior-y: contain;
   scrollbar-width: none;
-  background:
-    linear-gradient(
-      180deg,
-      #afeafb 0%,
-      #a7e0f2 12%,
-      #8cc5d8 30%,
-      #6ea2b7 54%,
-      #5d91a6 74%,
-      #477687 90%,
-      #3d6d7b 100%
-    );
+  background: var(--main-bg-gradient);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -212,10 +221,10 @@ nextjs-portal {
   height: min(109px, 15.48vw);
   place-items: center;
   border-radius: 50%;
-  background: rgba(43, 96, 116, 0.64);
+  background: var(--main-social-button);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 12px 24px rgba(24, 65, 78, 0.14);
+    inset 0 1px 0 var(--main-social-highlight),
+    0 12px 24px var(--main-social-shadow);
   color: #ffffff;
   cursor: pointer;
   outline: none;
@@ -231,15 +240,15 @@ nextjs-portal {
 
 .social-button:active {
   transform: scale(0.965);
-  background: rgba(35, 83, 101, 0.72);
+  background: var(--main-social-button-pressed);
   opacity: 0.92;
 }
 
 .social-button:focus-visible {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(155, 160, 205, 0.2),
     0 0 0 3px rgba(255, 255, 255, 0.34),
-    0 12px 24px rgba(24, 65, 78, 0.14);
+    0 12px 24px var(--main-social-shadow);
 }
 
 .social-button span {
@@ -286,7 +295,7 @@ nextjs-portal {
   margin-top: min(25px, 3.55vw);
   padding: 0 0 var(--about-footer-visible);
   background: transparent;
-  color: #f4f8fa;
+  color: #ffffff;
   text-align: center;
 }
 
@@ -307,8 +316,8 @@ nextjs-portal {
   justify-content: center;
   padding: min(52px, 7.39vw) min(60px, 8.52vw);
   border-radius: var(--about-radius);
-  background: #3e7e97;
-  box-shadow: 0 14px 30px rgba(21, 61, 75, 0.11);
+  background: var(--main-surface);
+  box-shadow: 0 14px 30px var(--main-surface-shadow);
 }
 
 .about-card__footer {
@@ -326,9 +335,9 @@ nextjs-portal {
   padding: var(--about-overlap) 32px 0;
   border: 0;
   border-radius: 0 0 var(--about-radius) var(--about-radius);
-  background: #2d667b;
-  box-shadow: 0 14px 28px rgba(21, 61, 75, 0.09);
-  color: rgba(244, 248, 250, 0.78);
+  background: var(--main-surface-dark);
+  box-shadow: 0 14px 28px var(--main-surface-dark-shadow);
+  color: rgba(255, 255, 255, 0.82);
   font-size: 23px;
   font-weight: 500;
   line-height: 28px;
@@ -363,7 +372,7 @@ nextjs-portal {
   flex: 0 0 20px;
   width: 20px;
   height: 18px;
-  color: #52a8ff;
+  color: var(--main-accent-blue);
 }
 
 @media (max-width: 430px) {
@@ -420,6 +429,7 @@ nextjs-portal {
   --bottom-menu-indicator-bg: rgba(255, 255, 255, 0.07);
   --bottom-menu-indicator-glow: rgba(255, 255, 255, 0.01);
   --bottom-menu-indicator-shadow: rgba(0, 0, 0, 0.045);
+  --bottom-menu-active-color: #43c9cb;
   --bottom-menu-radius: min(56px, 7.95vw);
   position: fixed;
   right: 0;
@@ -506,16 +516,17 @@ nextjs-portal {
 body:has(.profile-screen) .bottom-menu {
   --bottom-menu-backdrop: blur(64px) saturate(108%) brightness(0.96)
     contrast(0.96);
-  --bottom-menu-bg: rgba(20, 58, 68, 0.1);
-  --bottom-menu-fill: rgba(218, 251, 255, 0.008);
-  --bottom-menu-glow: rgba(218, 251, 255, 0.01);
-  --bottom-menu-inner-shade: rgba(18, 70, 84, 0.02);
-  --bottom-menu-shadow: rgba(18, 61, 73, 0.085);
-  --bottom-menu-stroke: rgba(218, 251, 255, 0.105);
-  --bottom-menu-topline: rgba(235, 255, 255, 0.15);
-  --bottom-menu-indicator-bg: rgba(190, 238, 247, 0.075);
-  --bottom-menu-indicator-glow: rgba(235, 255, 255, 0.012);
-  --bottom-menu-indicator-shadow: rgba(21, 74, 87, 0.045);
+  --bottom-menu-bg: rgba(38, 42, 64, 0.68);
+  --bottom-menu-fill: rgba(54, 57, 80, 0.1);
+  --bottom-menu-glow: rgba(155, 160, 205, 0.035);
+  --bottom-menu-inner-shade: rgba(14, 18, 34, 0.09);
+  --bottom-menu-shadow: rgba(20, 23, 42, 0.26);
+  --bottom-menu-stroke: rgba(120, 126, 165, 0.38);
+  --bottom-menu-topline: rgba(155, 160, 205, 0.22);
+  --bottom-menu-indicator-bg: rgba(78, 82, 111, 0.78);
+  --bottom-menu-indicator-glow: rgba(150, 156, 205, 0.05);
+  --bottom-menu-indicator-shadow: rgba(20, 23, 42, 0.18);
+  --bottom-menu-active-color: var(--main-accent-blue);
 }
 
 .bottom-menu__tabs {
@@ -2712,9 +2723,9 @@ body:has(.profile-screen) .bottom-menu {
 }
 
 .bottom-menu__tab[aria-selected="true"] {
-  --bottom-menu-icon-mark: #43c9cb;
+  --bottom-menu-icon-mark: var(--bottom-menu-active-color);
   --bottom-menu-icon-size: min(50px, 7.1vw);
-  color: #43c9cb;
+  color: var(--bottom-menu-active-color);
   opacity: 1;
 }
 
@@ -2752,18 +2763,22 @@ body:has(.profile-screen) .bottom-menu {
 
 @supports not ((backdrop-filter: blur(1px))) {
   .social-button {
-    background: rgba(55, 111, 132, 0.75);
+    background: rgba(72, 75, 101, 0.78);
   }
 
   .about-card__panel {
-    background: #3e7e97;
+    background: #4f536b;
   }
 
   .about-card__footer {
-    background: #2d667b;
+    background: #2b2f44;
   }
 
   .bottom-menu {
     background: rgba(10, 10, 12, 0.58);
+  }
+
+  body:has(.profile-screen) .bottom-menu {
+    background: rgba(38, 42, 64, 0.72);
   }
 }
